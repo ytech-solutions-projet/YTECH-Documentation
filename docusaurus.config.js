@@ -5,7 +5,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Documentation YTECH',
-  tagline: 'Déploiement, sécurisation et exploitation du projet YTECH',
+  tagline: 'Cybersécurité, sécurisation et exploitation du projet YTECH',
   url: 'https://ytech-solutions-projet.github.io',
   baseUrl: '/YTECH-Documentation/',
   organizationName: 'ytech-solutions-projet',
@@ -49,6 +49,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
+        defaultMode: 'dark',
         respectPrefersColorScheme: true,
       },
       navbar: {
@@ -61,6 +62,11 @@ const config = {
             label: 'Documentation',
           },
           {
+            to: '/docs/securisation/securisation-serveur-linux',
+            label: 'Sécurisation',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/ytech-solutions-projet/YTECH-Documentation',
             label: 'GitHub',
             position: 'right',
@@ -71,15 +77,32 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Cyber',
             items: [
               {
                 label: 'Introduction',
                 to: '/docs/intro',
               },
               {
-                label: 'Architecture',
+                label: 'Architecture sécurisée',
                 to: '/docs/architecture/architecture-initiale',
+              },
+              {
+                label: 'Durcissement Linux',
+                to: '/docs/securisation/securisation-serveur-linux',
+              },
+            ],
+          },
+          {
+            title: 'Exploitation',
+            items: [
+              {
+                label: 'Supervision Zabbix',
+                to: '/docs/services/supervision-zabbix',
+              },
+              {
+                label: 'Scans Nessus',
+                to: '/docs/services/scans-vulnerabilites-nessus',
               },
             ],
           },

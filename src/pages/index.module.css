@@ -1,23 +1,194 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
+  background:
+    linear-gradient(90deg, rgba(6, 8, 7, 0.92), rgba(6, 8, 7, 0.68)),
+    linear-gradient(180deg, rgba(36, 209, 126, 0.12), rgba(255, 90, 95, 0.1)),
+    var(--hero-image) center / cover no-repeat;
+  color: #f6fbf8;
+  min-height: min(640px, calc(100svh - var(--ifm-navbar-height) - 56px));
   overflow: hidden;
+  padding: 5rem 0;
+  position: relative;
+}
+
+.heroBanner::after {
+  background-image:
+    linear-gradient(rgba(246, 251, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(246, 251, 248, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: '';
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  position: absolute;
+}
+
+.heroContent {
+  max-width: 860px;
+  position: relative;
+  text-align: left;
+  z-index: 1;
+}
+
+.eyebrow,
+.sectionKicker {
+  color: #24d17e;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  color: #ffffff;
+  font-size: 4.9rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  max-width: 780px;
+}
+
+.heroSubtitle {
+  color: #dce8e1;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 680px;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    min-height: auto;
+    padding: 4rem 0 3.5rem;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
   }
 }
 
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.primaryButton {
+  background: #24d17e;
+  border-color: #24d17e;
+  color: #07110c;
+}
+
+.primaryButton:hover {
+  background: #6ee7a8;
+  border-color: #6ee7a8;
+  color: #07110c;
+}
+
+.secondaryButton {
+  background: rgba(246, 251, 248, 0.1);
+  border-color: rgba(246, 251, 248, 0.55);
+  color: #f6fbf8;
+}
+
+.secondaryButton:hover {
+  background: rgba(246, 251, 248, 0.2);
+  border-color: #f6fbf8;
+  color: #ffffff;
+}
+
+.commandCenter {
+  background: #f6fbf8;
+  padding: 4.5rem 0;
+}
+
+.commandGrid {
+  align-items: center;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+}
+
+.commandCopy h2 {
+  color: #101412;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.commandCopy p {
+  color: #43524a;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.signalPanel {
+  background: #101412;
+  border: 1px solid rgba(16, 20, 18, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(16, 20, 18, 0.2);
+  overflow: hidden;
+}
+
+.signalImage {
+  aspect-ratio: 16 / 9;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.signalStats {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.signalStats span {
+  background: #151c18;
+  color: #bff7d9;
+  font-size: 0.9rem;
+  font-weight: 800;
+  min-height: 48px;
+  padding: 0.9rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 760px) {
+  .buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .buttons a {
+    width: 100%;
+  }
+
+  .commandCenter {
+    padding: 3rem 0;
+  }
+
+  .commandGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .commandCopy h2 {
+    font-size: 1.9rem;
+  }
+
+  .signalStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

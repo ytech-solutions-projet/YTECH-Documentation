@@ -1,54 +1,54 @@
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Architecture',
-    image: require('@site/static/img/architecture/architecture-finale.png').default,
-    imageAlt: 'Architecture finale du projet YTECH',
-    description: (
-      <>
-        Vue d&apos;ensemble de l&apos;infrastructure, de l&apos;environnement technique
-        et de l&apos;organisation cible.
-      </>
-    ),
-  },
-  {
-    title: 'Déploiement',
-    image: require('@site/static/img/deploiement/site-vitrine-home.png').default,
-    imageAlt: 'Application YTECH déployée',
-    description: (
-      <>
-        Étapes de mise en ligne, configuration PM2, reverse proxy Nginx et
-        validation de l&apos;application.
-      </>
-    ),
-  },
-  {
-    title: 'Sécurisation',
+    title: 'Durcissement Linux',
     image: require('@site/static/img/securisation-linux/lynis-score.png').default,
-    imageAlt: 'Contrôle de sécurisation Linux',
+    imageAlt: 'Audit Lynis du serveur Linux',
+    href: '/docs/securisation/securisation-serveur-linux',
     description: (
       <>
-        Durcissement Linux, WAF, supervision, centralisation des logs et scans
-        de vulnérabilités.
+        Comptes, SSH, pare-feu, Fail2ban et contrôle de la posture système.
+      </>
+    ),
+  },
+  {
+    title: 'Reverse proxy et WAF',
+    image: require('@site/static/img/nginx/nginx-config.png').default,
+    imageAlt: 'Configuration Nginx du reverse proxy',
+    href: '/docs/securisation/reverse-proxy-nginx',
+    description: (
+      <>
+        Publication contrôlée, filtrage HTTP et protection de l&apos;application.
+      </>
+    ),
+  },
+  {
+    title: 'Logs et vulnérabilités',
+    image: require('@site/static/img/nessus/nessus-summary.png').default,
+    imageAlt: 'Synthèse de scan Nessus',
+    href: '/docs/services/scans-vulnerabilites-nessus',
+    description: (
+      <>
+        Scans Nessus, centralisation Graylog et signaux de supervision Zabbix.
       </>
     ),
   },
 ];
 
-function Feature({image, imageAlt, title, description}) {
+function Feature({image, imageAlt, title, description, href}) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
+    <article className={clsx(styles.featureCard)}>
+      <Link to={href} className={styles.featureLink}>
         <img className={styles.featureImage} src={image} alt={imageAlt} />
-      </div>
-      <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
-      </div>
-    </div>
+        <span>Consulter</span>
+      </Link>
+    </article>
   );
 }
 
@@ -56,7 +56,11 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={styles.featureHeader}>
+          <p>Points de contrôle</p>
+          <Heading as="h2">Les zones critiques du projet.</Heading>
+        </div>
+        <div className={styles.featureGrid}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}

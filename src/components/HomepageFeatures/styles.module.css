@@ -1,0 +1,15 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureImage {
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  width: 280px;
+}

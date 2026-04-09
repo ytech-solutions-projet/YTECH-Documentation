@@ -7,8 +7,8 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-const heroImage = require('@site/static/img/architecture/architecture-finale.png').default;
-const dashboardImage = require('@site/static/img/deploiement/app-dashboard.png').default;
+const heroImage = require('@site/static/img/nessus/nessus-summary.png').default;
+const securityImage = require('@site/static/img/securisation-linux/fail2ban-status.png').default;
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -60,8 +60,8 @@ export default function Home() {
               </div>
               <div className={styles.signalPanel}>
                 <img
-                  src={dashboardImage}
-                  alt="Tableau de bord applicatif YTECH"
+                  src={securityImage}
+                  alt="Statut Fail2ban du serveur Linux"
                   className={styles.signalImage}
                 />
                 <div className={styles.signalStats} aria-label="Indicateurs cybersécurité">

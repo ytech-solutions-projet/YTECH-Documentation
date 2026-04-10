@@ -29,10 +29,22 @@ Cette capture montre la page de contact, destinée à faciliter les échanges en
 
 ## Vue générale de l’application RH
 
-L’application RH correspond à la partie interne du projet. Elle permet de manipuler des données d’employés, de consulter des profils, d’accéder à un tableau de bord utilisateur et d’effectuer des opérations de gestion.
+L’application RH correspond à la partie interne du projet. Elle permet aux employés de se connecter à leur espace, de consulter leurs informations, d’accéder à un tableau de bord utilisateur et d’effectuer plusieurs opérations liées à leur compte.
 
-![Connexion à l’application RH](/img/deploiement/crud-login.png)
+![Connexion à l’application RH](/img/deploiement/login-hr.png)
 
 Cette capture montre l’interface de connexion à l’application RH. Elle constitue le point d’entrée de l’espace interne.
+
+![Tableau de bord de l’application RH](/img/deploiement/dashboard-hr.png)
+
+Cette capture présente le tableau de bord principal de l’application RH. On y retrouve les informations de l’employé ainsi qu’un aperçu des fonctionnalités internes disponibles.
+
+![Modification du mot de passe dans l’application RH](/img/deploiement/change-password.png)
+
+Cette interface illustre la fonctionnalité de changement de mot de passe, qui participe à la sécurisation des accès utilisateurs.
+
+![Suivi des avertissements dans l’application RH](/img/deploiement/warnings-hr.png)
+
+Cette vue montre l’espace de consultation des avertissements et blâmes, destiné au suivi administratif interne.
 
 L’ensemble du projet repose sur une architecture web moderne utilisant un frontend, un backend et une base de données. Dans notre cas, les principales technologies utilisées sont **React**, **Vite**, **Node.js**, **Express**, **PostgreSQL**, **Nginx** et **Ubuntu Server**. À cela s’ajoutent plusieurs outils de sécurité, de supervision et d’administration étudiés dans les sections suivantes.

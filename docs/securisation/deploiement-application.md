@@ -24,22 +24,23 @@ Cette capture montre le formulaire d’inscription du site vitrine.
 
 ## Application RH interne
 
-L’application RH représente la partie métier du projet. Elle permet de gérer les employés, leurs profils et plusieurs opérations internes.
+L’application RH représente la partie métier du projet. Elle permet aux employés d’accéder à leur espace interne, de consulter leurs informations personnelles et d’utiliser différentes fonctionnalités de gestion.
 
-![Connexion à l’application RH](/img/deploiement/crud-login.png)
+![Connexion à l’application RH](/img/deploiement/login-hr.png)
 
 Cette capture montre la page de connexion de l’application RH.
 
+![Tableau de bord de l’application RH](/img/deploiement/dashboard-hr.png)
 
-Cette capture présente le tableau de bord utilisateur après authentification.
+Cette capture présente le tableau de bord utilisateur après authentification. On y voit les informations principales du salarié ainsi qu’un résumé des éléments RH disponibles.
 
-![Liste des employés dans l’application RH](/img/deploiement/crud-employee-list.png)
+![Modification du mot de passe dans l’application RH](/img/deploiement/change-password.png)
 
-Cette interface illustre la gestion des employés dans l’application RH. Elle démontre que les données sont effectivement manipulées via une logique applicative réelle.
+Cette interface illustre la fonctionnalité de changement de mot de passe. Elle montre qu’une gestion du compte utilisateur a bien été mise en place dans l’espace interne.
 
-![Profil utilisateur RH](/img/deploiement/crud-profile.png)
+![Consultation des avertissements dans l’application RH](/img/deploiement/warnings-hr.png)
 
-Cette capture présente une vue de profil dans l’application RH.
+Cette capture présente l’écran de consultation des avertissements et blâmes. Elle met en évidence une fonctionnalité RH dédiée au suivi administratif des employés.
 
 ## Exécution du backend avec PM2
 

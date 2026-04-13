@@ -12,13 +12,15 @@ Un WAF agit comme un filtre spécialisé pour les applications web. Contrairemen
 
 ![Page de détection SafeLine WAF](/img/waf/safeline-waf-detection-page.jpg)
 
-Cette capture montre l’écran affiché lorsqu’une requête est interceptée ou qu’un filtrage SafeLine WAF est en cours. Elle matérialise la couche de protection visible côté utilisateur, avec le message `Security Detection Powered By SafeLine WAF`.
+Cette capture montre l’écran affiché lorsqu’une requête est interceptée ou qu’un filtrage SafeLine WAF est en cours. On distingue une page bleue plein écran, le domaine `ytech.myddns.me` dans le navigateur et, en bas de l’écran, le message `Security Detection Powered By SafeLine WAF`.
 
-## Vue d’ensemble du tableau de bord
+Cette vue est intéressante dans la documentation, car elle matérialise la protection de manière visible côté utilisateur. Elle montre qu’entre le client et l’application, une couche supplémentaire est capable d’inspecter la requête et de renvoyer une réponse spécifique lorsqu’un contrôle de sécurité s’applique.
 
-![Vue synthétique du tableau de bord SafeLine WAF](/img/waf/safeline-waf-dashboard.jpg)
+## Tableau de bord SafeLine WAF
 
-Cette vue reprend les principaux éléments visibles sur le tableau de bord **SafeLine WAF > Statistics** utilisé dans le projet. On y retrouve plusieurs indicateurs utiles :
+![Tableau de bord SafeLine WAF](/img/waf/safeline-waf-dashboard.jpg)
+
+Cette capture reprend les principaux éléments visibles sur le tableau de bord **SafeLine WAF > Statistics** utilisé dans le projet. On y retrouve plusieurs indicateurs utiles :
 
 - `Requests : 70`, soit le volume total de requêtes observées ;
 - `Views (PV) : 58`, qui donne une idée du nombre de consultations ;
@@ -33,7 +35,7 @@ La partie droite du tableau de bord montre aussi deux graphes utiles :
 - un graphe de statut des requêtes, qui permet d’observer les pics d’activité ;
 - un graphe de blocage, qui permet d’identifier visuellement les moments où le WAF a déclenché une action de protection.
 
-Enfin, la zone **Geo Location** donne une répartition géographique des requêtes observées. Dans cette vue, les origines les plus visibles sont l’Inde, le Maroc, les États-Unis, la France et le Royaume-Uni. Même dans un projet pédagogique, ce type d’information est utile pour comprendre d’où viennent les accès et si certains flux paraissent cohérents avec le contexte attendu.
+La zone **Geo Location** donne une répartition géographique des requêtes observées. Dans cette capture, les origines les plus visibles sont l’Inde, le Maroc, les États-Unis, la France et le Royaume-Uni. Même dans un projet pédagogique, ce type d’information est utile pour comprendre d’où viennent les accès et si certains flux paraissent cohérents avec le contexte attendu.
 
 ## Fonctions visibles dans l’interface
 

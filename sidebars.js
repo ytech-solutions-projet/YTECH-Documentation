@@ -31,6 +31,7 @@
         'services/acces-distant-vpn',
         'services/centralisation-logs-graylog',
         'services/gestion-secrets-bitwarden',
+        'services/assistant-ia-local',
         'services/scans-vulnerabilites-nessus',
         'services/supervision-zabbix',
       ],

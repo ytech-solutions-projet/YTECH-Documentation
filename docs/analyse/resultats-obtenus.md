@@ -12,6 +12,7 @@ Le projet YTech Solutions a permis d’obtenir plusieurs résultats concrets sur
 - déploiement d’une application RH opérationnelle ;
 - intégration d’un backend exécuté avec PM2 ;
 - mise en place d’un reverse proxy avec Nginx ;
+- mise en place d’un assistant IA local avec Open WebUI et Ollama ;
 - présence d’outils de supervision, de journalisation et de gestion des secrets.
 
 ## Résultats en matière de sécurité
@@ -30,6 +31,7 @@ Le projet a également permis de développer plusieurs compétences :
 
 - compréhension des architectures web ;
 - administration Linux ;
+- découverte de l’intégration d’un service d’IA local ;
 - supervision ;
 - gestion des accès ;
 - journalisation ;

@@ -21,6 +21,11 @@ Le projet YTech Solutions repose sur plusieurs technologies et outils complémen
 - **PM2** : gestionnaire de processus Node.js ;
 - **Docker** : déploiement de certains outils.
 
+## Outils collaboratifs et d’assistance
+
+- **Ollama** : exécution locale de modèles d’IA ;
+- **Open WebUI** : interface web pour l’usage collaboratif des modèles.
+
 ## Outils de sécurité et de supervision
 
 - **OPNsense** : pare-feu, routage et filtrage réseau ;

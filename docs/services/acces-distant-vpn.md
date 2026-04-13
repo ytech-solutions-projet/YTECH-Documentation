@@ -1,4 +1,4 @@
-﻿---
+---
 title: Accès distant sécurisé
 ---
 
@@ -14,8 +14,17 @@ Cette capture montre l’état des machines connectées via Tailscale.
 
 ## Ngrok
 
+![Tunnel Ngrok indisponible](/img/acces-distant/ngrok-endpoint-offline.png)
 
-Cette capture montre l’utilisation de Ngrok pour exposer temporairement un service de test.
+Cette capture montre un accès **Ngrok** aboutissant à l’erreur `ERR_NGROK_3200`, indiquant que l’endpoint public n’est plus disponible. Cette situation est intéressante dans la documentation, car elle illustre bien la nature temporaire de ce type de tunnel : un service peut être exposé rapidement, mais l’URL publique dépend de l’état du tunnel en cours.
+
+Ngrok reste utile dans un projet pour :
+
+- exposer rapidement une application de test sans ouvrir tout le réseau ;
+- réaliser une démonstration ponctuelle ;
+- vérifier un accès externe sans configuration lourde.
+
+Cette capture permet aussi de montrer une limite importante : contrairement à une solution plus pérenne comme un reverse proxy stable ou un accès VPN structuré, Ngrok n’est pas destiné à devenir le mécanisme principal d’exposition d’un service interne.
 
 ## Intérêt
 

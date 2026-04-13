@@ -8,6 +8,12 @@ Dans le cadre du projet, un **WAF** (Web Application Firewall) a été intégré
 
 Un WAF agit comme un filtre spécialisé pour les applications web. Contrairement à un pare-feu réseau classique, il ne s’intéresse pas seulement aux adresses IP ou aux ports, mais aussi au contenu des échanges web : URL appelées, paramètres transmis, comportements suspects, volume de requêtes ou tentatives d’exploitation.
 
+## Page de détection SafeLine
+
+![Page de détection SafeLine WAF](/img/waf/safeline-waf-detection-page.svg)
+
+Cette capture montre l’écran affiché lorsqu’une requête est interceptée ou qu’un filtrage SafeLine WAF est en cours. Elle matérialise la couche de protection visible côté utilisateur, avec le message `Security Detection Powered By SafeLine WAF`.
+
 ## Vue d’ensemble du tableau de bord
 
 ![Vue synthétique du tableau de bord SafeLine WAF](/img/waf/safeline-waf-dashboard.svg)

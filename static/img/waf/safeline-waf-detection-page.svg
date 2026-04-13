@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
+  <title id="title">Page de détection SafeLine WAF</title>
+  <desc id="desc">Reproduction visuelle d'une page bleue de détection SafeLine WAF avec barre d'onglets en haut et message au bas de la page.</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0f6db2"/>
+      <stop offset="100%" stop-color="#1569aa"/>
+    </linearGradient>
+    <style>
+      .ui { font: 20px 'Segoe UI', Arial, sans-serif; fill: #5f6770; }
+      .tab { font: 18px 'Segoe UI', Arial, sans-serif; fill: #5d6670; }
+      .tabActive { font: 18px 'Segoe UI', Arial, sans-serif; fill: #4d5660; }
+      .foot { font: 15px 'Segoe UI', Arial, sans-serif; fill: #585858; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="800" fill="#f4f6f8"/>
+  <rect x="0" y="0" width="1600" height="54" fill="#f7f8fa"/>
+  <rect x="38" y="7" width="286" height="38" rx="10" fill="#eef2f5" stroke="#d8dde3"/>
+  <text x="70" y="31" class="tab">Deploy SafeLine | SafeLin...</text>
+  <rect x="344" y="7" width="260" height="38" rx="10" fill="#f5f7f9" stroke="#d8dde3"/>
+  <circle cx="373" cy="26" r="10" fill="#1c7a85"/>
+  <text x="393" y="31" class="tab">SafeLine WAF</text>
+  <rect x="661" y="7" width="315" height="38" rx="10" fill="#ffffff" stroke="#d8dde3"/>
+  <circle cx="684" cy="26" r="4" fill="#4aa6ff"/>
+  <text x="703" y="31" class="tabActive">ytech.myddns.me/</text>
+  <rect x="1027" y="7" width="235" height="38" rx="10" fill="#f5f7f9" stroke="#d8dde3"/>
+  <circle cx="1056" cy="26" r="10" fill="#1c7a85"/>
+  <text x="1076" y="31" class="tab">SafeLine WAF</text>
+  <rect x="1280" y="7" width="250" height="38" rx="10" fill="#f5f7f9" stroke="#d8dde3"/>
+  <text x="1298" y="31" class="tab">Email temporaire jetable</text>
+  <rect x="1535" y="7" width="28" height="38" rx="10" fill="#f5f7f9" stroke="#d8dde3"/>
+  <text x="1545" y="31" class="tab">+</text>
+
+  <rect x="0" y="54" width="1600" height="34" fill="#fafbfc"/>
+  <line x1="0" y1="88" x2="1600" y2="88" stroke="#dfe4ea"/>
+  <circle cx="19" cy="71" r="7" fill="none" stroke="#8e98a4" stroke-width="2"/>
+  <path d="M46 71h16" stroke="#8e98a4" stroke-width="2" stroke-linecap="round"/>
+  <path d="M77 64l8 7-8 7" fill="none" stroke="#8e98a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="230" y="58" width="26" height="26" rx="13" fill="#ffffff" stroke="#cfd6de"/>
+  <path d="M244 64l5 6-5 6" fill="none" stroke="#8e98a4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="272" y="76" class="ui" fill="#c45b5b">Not Secure</text>
+  <text x="402" y="76" class="ui">ytech.myddns.me</text>
+  <path d="M1510 64v14m-7-7h14" stroke="#8e98a4" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="1568" cy="71" r="8" fill="none" stroke="#8e98a4" stroke-width="2"/>
+
+  <rect x="0" y="88" width="1600" height="712" fill="url(#blue)"/>
+
+  <g transform="translate(763,673)">
+    <path d="M32 0c11 7 22 8 32 0v13c0 19-13 32-32 37-19-5-32-18-32-37V0c10 8 21 7 32 0z" fill="none" stroke="#e8eef5" stroke-width="3"/>
+    <path d="M17 20c9-8 21-10 31-4 7 4 13 4 18 1" fill="none" stroke="#e8eef5" stroke-width="3" stroke-linecap="round"/>
+    <text x="32" y="28" text-anchor="middle" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#e8eef5" font-weight="700">S</text>
+  </g>
+  <text x="800" y="716" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="27" fill="#b3c5d7">Security Detection Powered By SafeLine WAF</text>
+
+  <rect x="0" y="770" width="268" height="30" fill="#f2f2f2" stroke="#d0d0d0"/>
+  <text x="9" y="790" class="foot">Transferring data from ytech.myddns.me...</text>
+</svg>

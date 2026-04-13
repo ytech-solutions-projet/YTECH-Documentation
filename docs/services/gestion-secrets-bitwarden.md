@@ -17,7 +17,9 @@ L’outil a été retenu pour répondre à plusieurs besoins :
 
 ## Vue globale des coffres
 
-[Capture à insérer : interface Vaultwarden “Tous les coffres” montrant la liste des comptes et des catégories.]
+![Vue globale des coffres Vaultwarden](/img/bitwarden/bitwarden-openwebui-accounts.png)
+
+Cette capture montre la vue `Tous les coffres` de Vaultwarden, avec plusieurs identifiants déjà enregistrés pour l’environnement YTech.
 
 La vue globale des coffres montre que l’outil est réellement utilisé comme référentiel d’accès. Elle permet d’observer :
 
@@ -27,6 +29,23 @@ La vue globale des coffres montre que l’outil est réellement utilisé comme r
 - l’indication du propriétaire sur les éléments enregistrés.
 
 Cette vue est importante, car elle montre que Vaultwarden n’est pas un outil ajouté “pour la forme”, mais une brique de gouvernance des accès effectivement exploitée.
+
+## Comptes de l’assistant IA dans Vaultwarden
+
+La même vue montre aussi que les accès à l’**assistant IA local** sont centralisés dans le coffre. On distingue plusieurs entrées liées à l’interface Open WebUI, notamment avec les comptes :
+
+- `benamar.othmane@ytech.local` ;
+- `elouakifi.ismail@ytech.local` ;
+- `herradi.bouchaib@ytech.local` ;
+- `hmichane.achraf@ytech.local` ;
+- `nasir.mostafa@ytech.local`.
+
+Cela permet de documenter un point important du projet :
+
+- les comptes utilisateurs de l’IA ne sont pas gérés de manière informelle ;
+- leurs identifiants sont stockés dans Vaultwarden ;
+- l’administration des accès reste cohérente avec le reste de l’infrastructure ;
+- la documentation peut prouver l’existence des comptes sans jamais afficher les mots de passe.
 
 ## Remplissage automatique sur l’application RH
 

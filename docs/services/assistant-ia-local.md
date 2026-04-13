@@ -34,7 +34,7 @@ Dans l’architecture retenue :
 
 ## Interface d’accueil de l’assistant
 
-![Accueil Open WebUI pour un utilisateur](/img/ia/openwebui-benamar-home.png)
+![Accueil Open WebUI pour le compte BENAMAR Othmane](/img/ia/openwebui-benamar-home-2026.png)
 
 Cette première capture montre l’écran d’accueil de **Open WebUI** une fois l’utilisateur connecté. On y voit :
 
@@ -45,6 +45,35 @@ Cette première capture montre l’écran d’accueil de **Open WebUI** une fois
 - des commandes d’entrée vocale et d’actions rapides.
 
 Cette personnalisation est intéressante, car elle montre que l’outil s’inscrit dans un contexte multi-utilisateur et non dans une simple page de test.
+
+## Utilisation par plusieurs utilisateurs
+
+La plateforme a également été testée avec plusieurs comptes distincts. Les captures suivantes montrent que l’interface adapte le message d’accueil au profil connecté, ce qui confirme un fonctionnement réel en **mode multi-utilisateur**.
+
+On peut en déduire plusieurs éléments utiles :
+
+- chaque utilisateur dispose d’une session identifiable ;
+- le nom du compte connecté apparaît directement dans l’accueil ;
+- l’outil peut être proposé comme service interne à plusieurs membres de l’équipe ;
+- l’expérience reste cohérente quel que soit le profil utilisé.
+
+Les identifiants associés à ces comptes sont, eux aussi, centralisés dans **Vaultwarden**, ce qui évite de gérer les accès Open WebUI de manière dispersée ou informelle.
+
+![Accueil Open WebUI pour le compte HERRADI Bouchaib](/img/ia/openwebui-user-herradi-bouchaib.png)
+
+Cette vue montre la personnalisation de l’accueil pour le compte `HERRADI Bouchaib`.
+
+![Accueil Open WebUI pour le compte ELOUAKIFI Ismail](/img/ia/openwebui-user-elouakifi-ismail.png)
+
+Cette vue montre la personnalisation de l’accueil pour le compte `ELOUAKIFI Ismail`.
+
+![Accueil Open WebUI pour le compte NASIR Mostafa](/img/ia/openwebui-user-nasir-mostafa.png)
+
+Cette vue montre la personnalisation de l’accueil pour le compte `NASIR Mostafa`.
+
+![Accueil Open WebUI pour le compte HMICHANE Achraf](/img/ia/openwebui-user-hmichane-achraf.png)
+
+Cette vue montre la personnalisation de l’accueil pour le compte `HMICHANE Achraf`.
 
 ## Sélection et usage du modèle
 

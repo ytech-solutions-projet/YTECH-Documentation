@@ -10,13 +10,13 @@ Un WAF agit comme un filtre spécialisé pour les applications web. Contrairemen
 
 ## Page de détection SafeLine
 
-![Page de détection SafeLine WAF](/img/waf/safeline-waf-detection-page.svg)
+![Page de détection SafeLine WAF](/img/waf/safeline-waf-detection-page.jpg)
 
 Cette capture montre l’écran affiché lorsqu’une requête est interceptée ou qu’un filtrage SafeLine WAF est en cours. Elle matérialise la couche de protection visible côté utilisateur, avec le message `Security Detection Powered By SafeLine WAF`.
 
 ## Vue d’ensemble du tableau de bord
 
-![Vue synthétique du tableau de bord SafeLine WAF](/img/waf/safeline-waf-dashboard.svg)
+![Vue synthétique du tableau de bord SafeLine WAF](/img/waf/safeline-waf-dashboard.jpg)
 
 Cette vue reprend les principaux éléments visibles sur le tableau de bord **SafeLine WAF > Statistics** utilisé dans le projet. On y retrouve plusieurs indicateurs utiles :
 

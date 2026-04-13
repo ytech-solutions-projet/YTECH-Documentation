@@ -23,6 +23,7 @@ Les résultats techniques les plus visibles sont les suivants :
 | Application RH accessible | Captures de connexion, tableau de bord et fonctionnalités internes | Démonstration de la partie métier |
 | Backend actif | Capture PM2 avec statut `online` | Validation de l’exécution côté serveur |
 | Reverse proxy en place | Configuration Nginx et test de validation | Exposition web mieux maîtrisée |
+| Assistant IA local multi-utilisateur | Captures Open WebUI pour plusieurs comptes | Preuve d’un service interne réellement exploitable |
 
 ## Résultats en matière de sécurité
 
@@ -43,6 +44,7 @@ Le projet a également produit plusieurs résultats concrets en matière de séc
 | Secrets | Centralisation dans Vaultwarden | Réduction des mauvaises pratiques |
 | Journalisation et supervision | Graylog et Zabbix opérationnels | Meilleure visibilité sur l’environnement |
 | Scan de vulnérabilités | Analyse réalisée avec Nessus | Évaluation plus objective de la posture de sécurité |
+| Détection réseau | Suricata actif et producteur d’événements | Capacité de visibilité supplémentaire sur le trafic |
 
 ## Résultats d’exploitation et de supervision
 
@@ -54,6 +56,13 @@ L’environnement final n’est pas seulement fonctionnel : il devient aussi mie
 - une documentation plus précise des composants et de leurs rôles.
 
 Ces éléments sont importants, car ils marquent le passage d’une logique de simple déploiement à une logique d’**exploitation**.
+
+Plus concrètement, le projet démontre désormais :
+
+- une collecte de logs via **Graylog** avec des inputs actifs en **GELF UDP** et **Syslog UDP** ;
+- une supervision **Zabbix** avec hôtes, scénario web et alertes visibles ;
+- une gestion centralisée des identifiants, y compris pour les comptes de l’assistant IA ;
+- une séparation plus nette entre exposition web, administration et observation.
 
 ## Résultats pédagogiques
 
@@ -76,7 +85,7 @@ Le projet montre qu’il est possible de :
 - produire des preuves techniques soutenables devant un lecteur ou un jury ;
 - expliquer de façon argumentée l’intérêt de chaque brique intégrée.
 
-## Limites ou éléments encore à compléter
+## Limites ou prolongements possibles
 
 Pour renforcer encore cette page, plusieurs données pourraient être ajoutées :
 
@@ -85,7 +94,7 @@ Pour renforcer encore cette page, plusieurs données pourraient être ajoutées 
 - nombre exact d’hôtes, de services et de scénarios supervisés ;
 - extraits de journaux ou d’alertes particulièrement représentatifs.
 
-> **À compléter avec les valeurs réelles observées dans l’environnement final.**
+Ces compléments seraient utiles pour une soutenance très orientée métriques, mais la documentation actuelle fournit déjà des preuves techniques suffisantes pour justifier les résultats obtenus.
 
 ## Conclusion de section
 

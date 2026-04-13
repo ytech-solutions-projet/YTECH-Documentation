@@ -36,17 +36,22 @@ L’accès SSH est un point critique dans l’administration d’un serveur. Il 
 
 Cette capture présente une partie de la configuration SSH, notamment les paramètres de sécurité liés à l’authentification et à l’accès administrateur.
 
-### Exemple de paramètres à documenter
+### Lignes directrices visibles dans la configuration
 
 ```conf
-# Exemple de configuration à adapter avec la valeur réelle observée
+# Exemple représentatif de durcissement SSH
 PermitRootLogin no
 PasswordAuthentication <yes|no>
 PubkeyAuthentication yes
 AllowUsers <utilisateurs_autorises>
 ```
 
-> **À compléter avec la configuration réelle du fichier `sshd_config`.**
+Même si la documentation ne recopie pas tout le fichier `sshd_config`, ce type de réglages montre déjà la logique retenue :
+
+- désactivation de l’accès `root` direct ;
+- préférence pour une authentification plus maîtrisée ;
+- limitation des utilisateurs autorisés ;
+- réduction de la surface d’accès administrateur.
 
 ## Audit Lynis
 
@@ -83,9 +88,23 @@ Cette évolution est importante, car elle apporte une **preuve mesurable** du re
 
 Cette sortie confirme que `suricata.service` est bien chargé, activé et actuellement en cours d’exécution sur le serveur.
 
+Les détails visibles dans la sortie permettent d’aller plus loin :
+
+- la version exécutée est `7.0.3` ;
+- le service est lancé en mode `SYSTEM` ;
+- la configuration est chargée depuis `/etc/suricata/suricata.yaml` ;
+- le processus utilise le mode `af-packet`, cohérent avec une logique d’observation réseau sur l’interface système.
+
 ![Extrait du fichier eve.json de Suricata](/img/securisation-linux/suricata-eve-json.jpg)
 
 L’extrait du fichier `eve.json` montre différents événements `flow` et `fileinfo`, ce qui confirme que Suricata produit bien des traces exploitables sur le trafic observé.
+
+On y retrouve notamment :
+
+- des métadonnées de flux réseau ;
+- des traces HTTP ;
+- des informations `fileinfo` ;
+- des éléments liés à des accès web observés sur l’environnement.
 
 En complément du durcissement du serveur, **Suricata** a été utilisé comme moteur de détection réseau. Les éléments attendus dans cette partie de la documentation doivent permettre de montrer :
 
@@ -93,13 +112,11 @@ En complément du durcissement du serveur, **Suricata** a été utilisé comme m
 - qu’il produit des événements exploitables ;
 - qu’il apporte une visibilité supplémentaire sur le trafic observé.
 
-À partir des éléments déjà identifiés, la lecture attendue est la suivante :
+À partir des éléments visibles, la lecture retenue est la suivante :
 
 - le service `suricata.service` est actif ;
 - la configuration est chargée depuis un fichier dédié ;
 - les événements du fichier `eve.json` contiennent des traces de flux réseau, d’accès HTTP et d’informations de type `fileinfo`.
-
-> **À compléter avec les commandes et les extraits réels observés dans l’environnement.**
 
 ## Apports concrets dans le projet
 

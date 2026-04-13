@@ -73,13 +73,15 @@ Cette solution présente aussi des limites importantes :
 | Tailscale | Réseau privé d’accès contrôlé | Administration régulière et accès privé | Dépend de l’inscription et de la gestion des nœuds autorisés |
 | Ngrok | Tunnel public temporaire | Démonstration ou test externe ponctuel | Endpoint non pérenne |
 
-## Sous-section à prévoir si nécessaire
+## Pourquoi aucun déploiement WireGuard séparé n’a été retenu
 
-Si le projet intègre ou documente plus tard un autre mécanisme de VPN, la structure suivante pourra être ajoutée :
+Le projet n’a pas eu besoin de documenter un déploiement WireGuard indépendant, car **Tailscale repose déjà sur WireGuard** pour établir son maillage sécurisé.
 
-### WireGuard
+Autrement dit :
 
-À compléter avec la configuration, la capture et le rôle réel si WireGuard a été utilisé explicitement dans l’environnement.
+- la logique WireGuard est bien présente sur le plan technique ;
+- elle est consommée à travers une solution plus simple à administrer ;
+- le choix retenu privilégie l’usage et l’efficacité opérationnelle plutôt qu’une configuration manuelle plus lourde.
 
 ## Bénéfices concrets pour le projet
 

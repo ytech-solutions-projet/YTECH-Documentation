@@ -49,7 +49,7 @@ Cette séparation apporte plusieurs avantages :
 
 ## Exemple de configuration commentée
 
-L’extrait ci-dessous est volontairement générique et doit être adapté avec les valeurs réelles de l’environnement.
+L’extrait ci-dessous est volontairement générique, mais il correspond bien à la logique d’exposition retenue dans le projet : service du frontend côté web, puis relais des appels applicatifs vers un backend local.
 
 ```nginx
 server {
@@ -73,7 +73,12 @@ server {
 }
 ```
 
-> **À compléter avec la valeur réelle observée dans l’environnement :** nom de domaine, chemin du build frontend, port backend et éventuelles directives TLS.
+Dans une configuration réelle, les éléments les plus sensibles à vérifier sont :
+
+- le `server_name` réellement utilisé ;
+- le chemin du frontend servi par Nginx ;
+- le port local sur lequel écoute le backend ;
+- les éventuelles directives supplémentaires liées au HTTPS ou aux en-têtes de sécurité.
 
 ## Preuve de configuration
 

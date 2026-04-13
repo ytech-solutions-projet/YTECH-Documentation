@@ -29,6 +29,15 @@ La configuration observée dans le projet montre l’utilisation de deux entrée
 
 Cette double configuration est intéressante, car elle permet de recevoir des journaux issus de sources et de formats différents. On constate également que les paramètres techniques de traitement sont visibles dans l’interface : écoute réseau, encodage, nombre de threads, ports utilisés et métriques de débit.
 
+Les valeurs observables dans la capture sont déjà parlantes :
+
+- écoute sur `0.0.0.0` ;
+- encodage `UTF-8` ;
+- `2` threads de traitement ;
+- port `12201` pour **GELF UDP** ;
+- port `1514` pour **Syslog UDP** ;
+- `recv_buffer_size` à `262144`.
+
 ## Principe de fonctionnement
 
 Le fonctionnement de Graylog peut être résumé de la manière suivante :
@@ -58,6 +67,8 @@ Une des vues disponibles dans le projet montre un message de test reçu via l’
 
 Cette preuve est importante, car elle montre que la chaîne de journalisation fonctionne réellement.
 
+La capture montre aussi que le message est associé à la source `192.168.10.40`, stocké dans l’index `graylog_0` et routé vers le `Default Stream`. Cela prouve que la réception, l’indexation et la consultation fonctionnent de bout en bout.
+
 ## Exemple de message reçu via Syslog
 
 La réception de messages système via **Syslog UDP** depuis une machine Ubuntu est illustrée dans la vue centralisée présentée ci-dessous.
@@ -83,6 +94,8 @@ La vue de recherche centralisée permet de consulter des événements variés pr
 
 Cette centralisation apporte une vraie valeur opérationnelle, car elle évite de devoir se connecter en permanence sur chaque machine pour consulter localement les journaux.
 
+Le graphique d’activité visible en haut de l’interface ajoute aussi une dimension temporelle : il devient possible d’identifier les périodes d’activité, de repérer un pic inhabituel et de replacer un événement dans une séquence chronologique.
+
 ## Synthèse opérationnelle
 
 | Source | Type de logs | Intérêt opérationnel | Bénéfice sécurité |
@@ -93,14 +106,12 @@ Cette centralisation apporte une vraie valeur opérationnelle, car elle évite d
 
 ## Limites et remarques
 
-Pour une documentation encore plus complète, il serait utile d’ajouter :
+Des compléments seraient possibles pour aller encore plus loin :
 
 - les ports exacts utilisés par chaque input ;
 - un exemple réel d’extracteur ou de pipeline si cette fonction a été exploitée ;
 - la politique de rétention ou de rotation des index ;
 - le détail des sources configurées de façon définitive.
-
-> **À compléter avec la valeur réelle observée dans l’environnement.**
 
 ## Conclusion de section
 

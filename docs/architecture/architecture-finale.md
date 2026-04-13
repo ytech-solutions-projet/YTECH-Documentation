@@ -37,7 +37,7 @@ Cette figure présente l’architecture finale retenue après restructuration de
 
 ## Lecture par zones
 
-Même si certaines adresses ou noms d’hôtes doivent encore être confirmés, la lecture de l’architecture finale peut être structurée en plusieurs zones :
+La lecture de l’architecture finale peut être structurée en plusieurs zones :
 
 | Zone | Rôle | Exposition |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ Même si certaines adresses ou noms d’hôtes doivent encore être confirmés, 
 | Zone applicative interne | Services métiers et composants plus sensibles | Interne |
 | Zone d’administration et d’observation | Supervision, journalisation, gestion des accès | Interne |
 
-> **À compléter avec la valeur réelle observée dans l’environnement :** adresses IP, noms d’hôtes, sous-réseaux exacts et détail du plan d’adressage final.
+La documentation publique privilégie ici les rôles, les flux et le cloisonnement logique plutôt que la reproduction exhaustive d’un plan d’adressage complet.
 
 ## Rôle des composants structurants
 

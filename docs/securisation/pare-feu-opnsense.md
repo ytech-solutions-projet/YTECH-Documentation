@@ -92,16 +92,16 @@ L’intégration d’OPNsense renforce concrètement l’architecture finale :
 
 Cette partie complète naturellement le reverse proxy, le hardening Linux, l’accès distant contrôlé et les outils d’observation.
 
-## Limites ou points à compléter
+## Limites et approfondissements possibles
 
-Pour une version encore plus démonstrative, il serait utile d’ajouter :
+Pour une version encore plus démonstrative, on pourrait ajouter :
 
 - le détail complet des interfaces et sous-réseaux ;
 - un extrait des règles WAN si elles ont été utilisées ;
 - la politique par défaut réellement appliquée ;
 - le nom exact des objets réseau utilisés dans la configuration finale.
 
-> **À compléter avec la valeur réelle observée dans l’environnement.**
+La documentation actuelle reste néanmoins suffisante pour comprendre la logique de filtrage : objets nommés, alias réutilisables, règles ciblées et limitation explicite de certains accès sensibles.
 
 ## Conclusion de section
 

@@ -19,19 +19,19 @@ L’environnement technique combine :
 
 | Composant | Rôle | Technologie | Hébergement | Exposition |
 | --- | --- | --- | --- | --- |
-| Site vitrine | Présentation publique des services | React / Vite | À compléter avec l’hébergement réel | Exposé |
-| Application RH | Fonction métier interne | Interface web + service applicatif | À compléter avec l’hébergement réel | Interne ou exposition contrôlée |
-| Service applicatif | Traitement des requêtes et logique métier | Node.js / Express | Serveur Linux | Interne |
-| Base de données | Stockage relationnel | PostgreSQL | Serveur Linux ou hôte dédié à confirmer | Interne |
-| Reverse proxy | Point d’entrée web et routage | Nginx | Serveur d’exposition | Exposé |
+| Site vitrine | Présentation publique des services | React / Vite | Build frontend servi via Nginx sur serveur Linux | Exposé |
+| Application RH | Fonction métier interne | Interface web + service applicatif | Serveur Linux Ubuntu derrière Nginx | Interne ou exposition contrôlée |
+| Service applicatif | Traitement des requêtes et logique métier | Node.js / Express | Serveur Linux avec PM2 | Interne |
+| Base de données | Stockage relationnel | PostgreSQL | Instance PostgreSQL interne | Interne |
+| Reverse proxy | Point d’entrée web et routage | Nginx | Serveur d’exposition sous Linux | Exposé |
 | Gestionnaire de processus | Maintien en service du backend | PM2 | Serveur applicatif | Interne |
-| Pare-feu | Filtrage et segmentation réseau | OPNsense | Équipement réseau / VM dédiée | Interne, rôle transverse |
-| Supervision | Suivi de l’état des services | Zabbix | À compléter avec l’hôte réel | Interne |
-| Journalisation | Centralisation des événements | Graylog | À compléter avec l’hôte réel | Interne |
-| Gestion des secrets | Centralisation des identifiants | Vaultwarden | À compléter avec l’hôte réel | Interne |
-| Scan de vulnérabilités | Évaluation de la posture de sécurité | Nessus Essentials | Hôte de sécurité à compléter | Interne |
-| Accès distant | Administration sécurisée | Tailscale / Ngrok | Selon usage | Contrôlé / temporaire |
-| Assistant IA local | Assistance interne et expérimentation | Ollama / Open WebUI | Réseau local | Interne |
+| Pare-feu | Filtrage et segmentation réseau | OPNsense | Appliance ou VM dédiée | Interne, rôle transverse |
+| Supervision | Suivi de l’état des services | Zabbix 7.0.24 | Serveur de supervision interne | Interne |
+| Journalisation | Centralisation des événements | Graylog 5.2.12 | Instance interne dédiée | Interne |
+| Gestion des secrets | Centralisation des identifiants | Vaultwarden | Instance web interne | Interne |
+| Scan de vulnérabilités | Évaluation de la posture de sécurité | Nessus Essentials | Interface Nessus sur le réseau interne | Interne |
+| Accès distant | Administration sécurisée | Tailscale / Ngrok | Postes d’administration et services concernés | Contrôlé / temporaire |
+| Assistant IA local | Assistance interne et expérimentation | Ollama / Open WebUI | Hôte interne dédié, accessible sur le port 3000 | Interne |
 
 ## Technologies applicatives
 
@@ -71,6 +71,16 @@ Le projet intègre également plusieurs outils transverses :
 - **Suricata** en appui de la visibilité réseau ;
 - **Ollama** et **Open WebUI** pour l’expérimentation d’un assistant IA local.
 
+## Repères concrets observés dans l’environnement
+
+Les captures et pages de service permettent déjà d’identifier plusieurs repères techniques concrets :
+
+- **Zabbix** apparaît en version `7.0.24` côté serveur et interface ;
+- **Graylog** affiche une instance `5.2.12` avec des inputs **GELF UDP** et **Syslog UDP** actifs ;
+- **Nessus Essentials** est accessible sur une interface web interne en `https` sur le port `8834` ;
+- **Open WebUI** est utilisé en local sur le port `3000` avec plusieurs comptes utilisateurs ;
+- **Suricata** est actif en version `7.0.3` sur le serveur Linux.
+
 ## Relation entre les composants
 
 Le fonctionnement global peut être résumé ainsi :
@@ -87,14 +97,13 @@ Utilisateur -> Nginx -> Service applicatif -> Base de données
                  |-> Journalisation / supervision / contrôle des accès
 ```
 
-## Données techniques à confirmer
+## Niveau de précision retenu
 
-Certaines informations gagneraient à être complétées dans une version finale encore plus précise :
+Cette documentation cherche un équilibre entre précision technique et lisibilité. Les rôles, les flux et les outils sont détaillés de façon explicite, tandis que certaines valeurs très sensibles ou trop dépendantes du contexte d’exécution ne sont pas répétées partout.
 
-- versions exactes de chaque composant ;
-- ports réellement utilisés ;
-- hôtes ou machines associés à chaque service ;
-- adresses IP finales ;
-- noms d’hôtes homogénéisés dans toute la documentation.
+L’essentiel est donc bien documenté :
 
-> **Point important :** lorsqu’une donnée précise n’est pas encore figée, il vaut mieux l’indiquer clairement plutôt que d’inventer une valeur approximative.
+- la place de chaque composant dans l’architecture ;
+- la logique d’exposition ou d’isolement ;
+- les outils réellement visibles dans l’environnement ;
+- les relations entre exploitation, sécurité et administration.

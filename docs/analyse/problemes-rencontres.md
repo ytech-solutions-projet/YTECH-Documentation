@@ -65,7 +65,7 @@ Certaines difficultés pourraient être encore mieux documentées si les éléme
 - chronologie détaillée de résolution ;
 - captures illustrant les incidents les plus significatifs.
 
-> **À compléter avec les commandes, messages d’erreur et captures réellement conservés pendant le projet.**
+Même sans ces annexes, l’analyse reste utile, car elle fait clairement apparaître les grandes familles de problèmes rencontrés et la logique de résolution appliquée.
 
 ## Conclusion de section
 

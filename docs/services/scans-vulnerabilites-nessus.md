@@ -17,20 +17,29 @@ L’outil a été utilisé pour :
 
 ## Contexte du scan
 
-La présente documentation doit être lue comme une base d’analyse. Les informations suivantes doivent être précisées si elles sont disponibles :
+La capture disponible donne déjà plusieurs informations concrètes sur la campagne Nessus utilisée dans le projet :
 
-- cible ou cibles exactes du scan ;
-- adresse IP ou nom d’hôte réellement scanné ;
-- date de lancement ;
-- profil ou politique de scan utilisée.
+- l’interface Nessus est accessible sur `https://192.168.10.19:8834` ;
+- le scan affiché porte le nom `Ytech-scan-for recordine vidéo` ;
+- la politique utilisée est `Advanced Scan` ;
+- l’exécution est réalisée par le `Local Scanner` ;
+- la base de sévérité visible est `CVSS v3.0` ;
+- l’onglet `Hosts` montre `1` hôte analysé.
 
-> **À compléter avec la valeur réelle observée dans l’environnement.**
+Ces éléments sont suffisants pour montrer qu’il ne s’agit pas d’une simple installation de l’outil, mais bien d’une campagne de scan réellement lancée et interprétable.
 
 ## Résumé du scan
 
 ![Résumé du scan Nessus](/img/nessus/nessus-summary.png)
 
 Cette capture présente un résumé global du scan de vulnérabilités réalisé sur l’infrastructure. Elle prouve qu’un audit automatisé a bien été mené et qu’une restitution exploitable a été obtenue.
+
+Les informations visibles permettent également de relever :
+
+- `1` hôte dans l’onglet `Hosts` ;
+- `3` entrées dans l’onglet `Vulnerabilities` ;
+- `2` éléments dans l’historique ;
+- une visualisation synthétique des niveaux de sévérité.
 
 ## Lecture des résultats
 
@@ -44,28 +53,29 @@ Même lorsque tous les détails ne sont pas encore documentés, un scan Nessus p
 
 Le rôle de cette classification est de hiérarchiser les actions à mener. Une faiblesse informationnelle n’a pas le même impact qu’une vulnérabilité élevée exposant directement un service.
 
-## Exemple de tableau de synthèse
+## Tableau de lecture du scan
 
-Le tableau ci-dessous fournit une structure claire à compléter avec les observations réelles du scan.
+Le tableau ci-dessous résume ce qui est directement observable dans la capture :
 
 | Élément | Observation | Impact | Action |
 | --- | --- | --- | --- |
-| Système ou service scanné | À compléter avec la cible réelle | Dépend de l’élément analysé | Vérifier la criticité |
-| Vulnérabilité ou famille détectée | À compléter avec le résultat réel | Faible / moyen / élevé / critique | Corriger, mettre à jour ou isoler |
-| Configuration faible | À compléter avec le résultat réel | Risque de durcissement insuffisant | Ajuster la configuration |
-| Information utile | À compléter avec le résultat réel | Impact limité mais intéressant | Documenter ou surveiller |
+| Scan Nessus | `Ytech-scan-for recordine vidéo` | Campagne clairement identifiée | Conserver une convention de nommage compréhensible |
+| Politique de scan | `Advanced Scan` | Couverture plus large qu’un test minimal | Adapter le profil au type de cible |
+| Moteur d’exécution | `Local Scanner` | Analyse réalisée depuis la plateforme locale | Vérifier la portée réseau du scanner |
+| Hôtes analysés | `1` hôte visible | Lecture ciblée des résultats | Prioriser plus facilement les corrections |
+| Vulnérabilités | `3` éléments visibles dans l’onglet dédié | Besoin de qualification et de hiérarchisation | Corriger ou surveiller selon la sévérité |
 
-## Détail d’une vulnérabilité
+## Comment lire un résultat Nessus
 
-[Capture à insérer : détail d’une vulnérabilité Nessus avec nom, description, sévérité et recommandation.]
+La capture disponible montre surtout une vue consolidée. Même sans zoom sur un plugin précis, la logique de lecture d’un résultat Nessus reste la suivante :
 
-Cette section a vocation à présenter au moins un exemple concret de résultat remonté par Nessus :
+1. identifier le nom de la vulnérabilité ou de la famille de plugins ;
+2. relever la sévérité attribuée ;
+3. comprendre si le risque est réellement exploitable dans le contexte du projet ;
+4. lire la recommandation proposée ;
+5. décider s’il faut corriger, compenser ou simplement surveiller.
 
-- nom de la vulnérabilité ou de la faiblesse ;
-- description synthétique ;
-- niveau de gravité ;
-- impact potentiel ;
-- recommandation de correction.
+Cette méthode de lecture est importante, car un scan n’a de valeur que si ses résultats sont interprétés avec discernement.
 
 ## Actions correctives ou remarques
 

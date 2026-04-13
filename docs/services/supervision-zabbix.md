@@ -32,6 +32,13 @@ Le tableau de bord global montre que la supervision ne se limite pas à un simpl
 
 Cette vue est précieuse, car elle fournit en quelques secondes une lecture opérationnelle de l’environnement.
 
+Les informations visibles permettent également de relever plusieurs repères concrets :
+
+- **Zabbix server version** : `7.0.24` ;
+- **Zabbix frontend version** : `7.0.24` ;
+- un problème courant affiché : `Linux: High memory utilization (>90% for 5m)` ;
+- une synthèse de disponibilité et de sévérité déjà exploitable directement depuis le tableau de bord.
+
 ## Hôtes surveillés
 
 ![Hôtes supervisés dans Zabbix](/img/zabbix/zabbix-hosts.jpg)
@@ -92,6 +99,8 @@ Selon les vues disponibles dans le projet, Zabbix peut également faire remonter
 
 Même lorsqu’une alerte n’est pas critique, sa présence est utile, car elle montre que la plateforme détecte effectivement des événements exploitables.
 
+Dans la capture globale, on voit d’ailleurs un exemple concret d’alerte de capacité mémoire sur le serveur Zabbix. Ce point est intéressant, car il prouve que la plateforme ne remonte pas uniquement des statuts “verts”, mais aussi des signaux réellement exploitables pour l’administration.
+
 ## Tableau de synthèse
 
 | Élément supervisé | Type de contrôle | Ce que cela permet de savoir |
@@ -103,14 +112,12 @@ Même lorsqu’une alerte n’est pas critique, sa présence est utile, car elle
 
 ## Limites et remarques
 
-Pour renforcer encore cette page, il serait utile d’ajouter :
+Des compléments pourraient encore être ajoutés pour aller plus loin :
 
 - les noms exacts de tous les hôtes suivis ;
 - les déclencheurs les plus importants ;
 - les seuils d’alerte retenus ;
 - les graphiques ou indicateurs les plus significatifs.
-
-> **À compléter avec la valeur réelle observée dans l’environnement.**
 
 ## Conclusion de section
 

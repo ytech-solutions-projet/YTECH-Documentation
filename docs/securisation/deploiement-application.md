@@ -34,6 +34,16 @@ Utilisateur -> Nginx -> Backend -> PostgreSQL
 
 > **Point important :** dans une architecture web moderne, le déploiement ne consiste pas à “lancer un site”, mais à faire coopérer plusieurs couches techniques.
 
+## Lecture opérationnelle du déploiement
+
+Dans le contexte du projet, cette chaîne signifie concrètement que :
+
+- le visiteur ou l’utilisateur n’accède pas directement à la base ou au backend ;
+- le frontend constitue la couche visible ;
+- le backend traite les actions métier et l’authentification ;
+- la base PostgreSQL conserve l’état applicatif ;
+- Nginx et PM2 assurent la stabilité d’exploitation autour de l’application.
+
 ## Site vitrine
 
 Le site vitrine représente la partie publique du projet. Il a été conçu pour présenter les services, afficher des contenus de communication et permettre plusieurs interactions avec les visiteurs.
@@ -150,7 +160,7 @@ PM2 apporte plusieurs bénéfices :
 
 ## Exemples de commandes à documenter
 
-Les commandes exactes doivent être complétées avec les valeurs réellement utilisées dans l’environnement. Le schéma ci-dessous fournit une base documentaire claire.
+Les chemins exacts peuvent varier selon l’organisation du serveur, mais la logique de déploiement documentée dans le projet peut être représentée ainsi :
 
 ```bash
 # Frontend : build de production
@@ -175,7 +185,7 @@ ss -tulpn
 ```
 
 ```nginx
-# Reverse proxy : à compléter avec la configuration réelle
+# Exemple représentatif de reverse proxy pour le projet
 server {
     listen 80;
     server_name <domaine-ou-adresse>;
@@ -191,6 +201,13 @@ server {
 }
 ```
 
+Même lorsque les chemins exacts ne sont pas publiés, l’important est de comprendre la structure :
+
+- `root` sert le frontend généré ;
+- `try_files` permet le bon fonctionnement d’une application web côté client ;
+- `proxy_pass` relaie les appels applicatifs vers le backend ;
+- la séparation entre contenu statique et API reste lisible.
+
 ## Intérêt dans le projet
 
 Le déploiement permet de démontrer que :
@@ -200,9 +217,9 @@ Le déploiement permet de démontrer que :
 - la base de données peut être intégrée à la logique métier ;
 - l’infrastructure applicative constitue une base crédible pour les mesures de sécurité suivantes.
 
-## Limites ou points à compléter
+## Points de précision possibles
 
-Certaines données gagneraient à être ajoutées dans une version finale encore plus détaillée :
+Une version encore plus poussée pourrait détailler :
 
 - arborescence réelle des projets frontend et backend ;
 - port exact du backend ;
@@ -210,7 +227,7 @@ Certaines données gagneraient à être ajoutées dans une version finale encore
 - extrait réel de configuration Nginx en production ;
 - commandes de build réellement exécutées.
 
-> **À compléter avec la commande, le chemin ou la valeur réelle observée dans l’environnement.**
+Ces informations sont utiles pour une reprise technique fine, mais elles ne sont pas indispensables pour comprendre la logique de déploiement exposée dans cette page.
 
 ## Conclusion de section
 

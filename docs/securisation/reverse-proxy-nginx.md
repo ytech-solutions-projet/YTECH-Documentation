@@ -1,38 +1,121 @@
-﻿---
+---
 title: Reverse proxy Nginx
 ---
 
 # Reverse proxy Nginx
 
-Le reverse proxy **Nginx** joue un rôle central dans l’architecture finale. Il sert d’intermédiaire entre l’utilisateur et les services internes, ce qui permet de mieux organiser les accès au site et à l’application.
+Le reverse proxy **Nginx** joue un rôle central dans l’architecture finale. Il constitue le point d’entrée des requêtes web et agit comme intermédiaire entre l’utilisateur et les services internes. Cette position est stratégique, car elle permet de contrôler l’exposition des services, d’organiser le routage et de mieux dissocier la couche web du service applicatif.
 
-Pour un lecteur non technique, on peut le comparer à un point de passage contrôlé : l’utilisateur ne s’adresse pas directement à tous les services internes, mais passe par Nginx, qui se charge de transmettre les requêtes au bon composant.
+## Rôle de Nginx dans le projet
 
-## Configuration du reverse proxy
+Dans le cadre de YTech Solutions, Nginx remplit plusieurs fonctions :
+
+- recevoir les requêtes provenant des utilisateurs ;
+- servir le frontend ou le contenu web exposé ;
+- relayer certaines requêtes vers le backend ;
+- éviter une exposition trop directe du service applicatif ;
+- simplifier la gestion des accès, des noms d’hôtes et du HTTPS.
+
+## Principe de fonctionnement
+
+Le cheminement logique d’une requête peut être résumé ainsi :
+
+1. l’utilisateur accède à l’adresse du site ;
+2. la requête arrive sur Nginx ;
+3. Nginx décide s’il doit servir un contenu statique ou transmettre la requête au backend ;
+4. le backend traite la demande et renvoie la réponse ;
+5. Nginx renvoie ensuite le résultat au client.
+
+```text
+Trafic utilisateur -> Nginx -> Backend -> Base de données
+```
+
+> **Bénéfice concret :** cette intermédiation permet de centraliser l’exposition web et de réduire le contact direct entre l’extérieur et le service applicatif.
+
+## Séparation entre frontend et backend
+
+L’intérêt du reverse proxy est particulièrement visible lorsqu’on distingue :
+
+- la **couche de présentation**, servie côté web ;
+- la **couche applicative**, traitée par le backend ;
+- la **couche de données**, qui doit rester interne.
+
+Cette séparation apporte plusieurs avantages :
+
+- une meilleure lisibilité de l’architecture ;
+- une administration plus simple ;
+- une réduction de la surface d’exposition ;
+- une meilleure compatibilité avec les mécanismes de filtrage et de journalisation.
+
+## Exemple de configuration commentée
+
+L’extrait ci-dessous est volontairement générique et doit être adapté avec les valeurs réelles de l’environnement.
+
+```nginx
+server {
+    listen 80;
+    server_name <nom-de-domaine-ou-adresse>;
+
+    # Sert le frontend généré en production
+    location / {
+        root /var/www/<repertoire-build-frontend>;
+        try_files $uri /index.html;
+    }
+
+    # Relaye les appels applicatifs vers le backend
+    location /api/ {
+        proxy_pass http://127.0.0.1:<port-backend>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+> **À compléter avec la valeur réelle observée dans l’environnement :** nom de domaine, chemin du build frontend, port backend et éventuelles directives TLS.
+
+## Preuve de configuration
 
 ![Configuration Nginx](/img/nginx/nginx-config.png)
 
-Cette capture montre une partie de la configuration du reverse proxy Nginx.
+Cette capture montre une partie de la configuration du reverse proxy Nginx utilisée dans le projet. Elle prouve qu’une configuration explicite a bien été définie et qu’il ne s’agit pas d’un simple accès web direct sans couche d’intermédiation.
 
 ## Vérification de la configuration
 
 ![Test de configuration Nginx](/img/nginx/nginx-test-ok.png)
 
-Cette capture montre le test de validation de la configuration Nginx. Elle confirme que la configuration chargée par le service est correcte.
+Cette capture montre le test de validation de la configuration Nginx. Le message de succès confirme que la syntaxe chargée par le service est correcte.
+
+Cette étape est importante, car une configuration erronée de reverse proxy peut rendre l’application indisponible ou provoquer des comportements inattendus dans le routage.
 
 ## Accès au site via Nginx
 
 ![Site accessible via Nginx](/img/nginx/site-nginx.png)
 
-Cette capture montre le site accessible via le serveur Nginx. Elle confirme que les requêtes HTTP sont bien servies par le reverse proxy.
+Cette capture montre le site accessible via Nginx. Elle confirme que les requêtes web passent bien par le reverse proxy avant d’atteindre les composants internes.
 
-## Intérêt de Nginx
+## Apports concrets dans l’architecture
 
-L’usage de Nginx permet :
+L’usage de Nginx apporte plusieurs bénéfices techniques :
 
-- de centraliser l’accès aux services ;
-- de mieux séparer la couche d’accès web du backend ;
-- de préparer ou renforcer la gestion du HTTPS ;
-- de réduire l’exposition directe des composants internes.
+- centralisation des accès web ;
+- séparation plus propre entre exposition et traitement applicatif ;
+- simplification de l’administration des flux HTTP/HTTPS ;
+- préparation naturelle à l’intégration du TLS, du WAF ou de règles spécifiques ;
+- meilleure maîtrise des chemins exposés.
 
-Cette brique contribue donc à une meilleure organisation de l’infrastructure et à un meilleur contrôle des flux web.
+## Limites et remarques
+
+Nginx ne remplace pas :
+
+- un pare-feu réseau ;
+- le hardening du serveur ;
+- une supervision correcte ;
+- une bonne configuration du backend.
+
+Il doit être compris comme une **brique d’exposition contrôlée**, pas comme une solution unique de sécurité.
+
+## Conclusion de section
+
+Dans YTech Solutions, Nginx constitue un point de passage stratégique entre les utilisateurs et les services. Son intérêt dépasse le simple affichage du site : il participe directement à la lisibilité, à l’administration et à la sécurisation de l’architecture.

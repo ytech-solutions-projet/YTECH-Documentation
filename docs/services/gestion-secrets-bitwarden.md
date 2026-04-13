@@ -4,27 +4,29 @@ title: Gestion des secrets avec Bitwarden
 
 # Gestion des secrets avec Bitwarden / Vaultwarden
 
-La gestion des mots de passe, identifiants et informations sensibles est un sujet important dans tout projet technique. Dans YTech Solutions, une solution de type **Bitwarden / Vaultwarden** a été déployée afin de centraliser ces informations et d’éviter leur dispersion.
+La gestion des mots de passe, identifiants et informations sensibles est un sujet important dans tout projet technique. Dans YTech Solutions, une solution de type **Bitwarden / Vaultwarden** a été déployée afin de centraliser ces informations et d’éviter leur dispersion dans des notes locales, des messages informels ou des fichiers non protégés.
 
-## Vue globale des coffres Vaultwarden
+## Rôle de Vaultwarden dans le projet
 
-_Capture fournie : liste des coffres dans Vaultwarden._
+L’outil a été retenu pour répondre à plusieurs besoins :
 
-La capture de Vaultwarden montre une vue plus large de l’organisation des accès dans le coffre. On y voit plusieurs éléments importants :
+- centraliser les identifiants dans un coffre unique ;
+- structurer les accès par utilisateur ou par service ;
+- faciliter l’authentification sans encourager les mauvaises pratiques ;
+- améliorer la gouvernance des accès dans l’environnement technique.
 
-- le filtrage par coffre, type d’élément et dossier ;
-- les catégories comme `Identifiant`, `Carte de paiement`, `Identité`, `Note` et `Clé SSH` ;
-- une liste d’entrées déjà créées pour différents utilisateurs et services ;
-- l’indication du propriétaire sur chaque élément.
+## Vue globale des coffres
 
-La liste visible met en évidence plusieurs comptes enregistrés dans l’environnement YTech, par exemple :
+[Capture à insérer : interface Vaultwarden “Tous les coffres” montrant la liste des comptes et des catégories.]
 
-- `BENAMAR Othmane` ;
-- `HR 1` ;
-- `IT` ;
-- plusieurs entrées liées à `192.168.9.193` avec des adresses `@ytech.local`.
+La vue globale des coffres montre que l’outil est réellement utilisé comme référentiel d’accès. Elle permet d’observer :
 
-Cette vue est intéressante, car elle montre que Vaultwarden n’est pas utilisé comme un coffre vide ou théorique. Il sert réellement à structurer les accès de plusieurs utilisateurs dans un espace unique, organisé et consultable.
+- une classification par type d’élément ;
+- une organisation par coffre et par dossier ;
+- la présence de plusieurs comptes liés à l’environnement YTech ;
+- l’indication du propriétaire sur les éléments enregistrés.
+
+Cette vue est importante, car elle montre que Vaultwarden n’est pas un outil ajouté “pour la forme”, mais une brique de gouvernance des accès effectivement exploitée.
 
 ## Remplissage automatique sur l’application RH
 
@@ -37,11 +39,9 @@ Cette fonctionnalité est importante, car elle permet :
 - de retrouver rapidement les comptes liés à un service donné ;
 - d’éviter la saisie manuelle répétée des identifiants ;
 - de limiter les erreurs de frappe sur les noms d’utilisateur ou les e-mails ;
-- d’encourager l’usage de mots de passe complexes, puisque l’utilisateur n’a plus besoin de les mémoriser manuellement.
+- d’encourager l’usage de mots de passe plus robustes.
 
-Dans le cadre du projet, cette capture illustre très bien le lien entre la gestion des secrets et l’usage réel des applications internes. Bitwarden n’est donc pas seulement un coffre de stockage : il devient aussi un outil d’assistance à l’authentification.
-
-## Coffre mobile Bitwarden
+## Usage mobile du coffre
 
 ![Coffre mobile Bitwarden](/img/bitwarden/bitwarden-mobile-vault.png)
 
@@ -52,21 +52,38 @@ Cette seconde capture montre l’interface mobile du coffre Bitwarden. On y retr
 - les suggestions de saisie automatique ;
 - la liste des identifiants enregistrés dans le coffre.
 
-L’application mobile apporte un intérêt pratique supplémentaire :
+Cette mobilité est utile, car elle montre que la gestion des accès peut rester centralisée sans être limitée à un seul poste d’administration.
 
-- les accès peuvent être consultés depuis un smartphone ;
-- les comptes sont organisés dans une interface simple et rapide ;
-- les identifiants restent centralisés dans un même espace sécurisé ;
-- l’équipe peut mieux gérer les secrets sans multiplier les notes locales ou les messages dispersés.
+## Ce que l’outil apporte concrètement
 
-## Intérêt
-
-Cette solution permet :
+L’usage de Bitwarden / Vaultwarden permet :
 
 - de centraliser les secrets ;
 - de structurer les accès ;
 - d’organiser les comptes utilisateurs dans un coffre unique ;
-- d’éviter les pratiques risquées comme les mots de passe dispersés ;
-- d’améliorer la rigueur administrative du projet.
+- de réduire la dépendance à des pratiques informelles ;
+- de soutenir une approche plus rigoureuse de l’administration.
 
-Pour un lecteur non technique, on peut comparer cet outil à un coffre-fort numérique partagé, organisé et plus sûr qu’un simple fichier local.
+## Gouvernance des accès
+
+Au-delà de l’aspect purement pratique, l’outil apporte aussi une valeur de gouvernance :
+
+- les comptes peuvent être recensés plus clairement ;
+- les identifiants ne sont pas disséminés dans plusieurs supports ;
+- la consultation des accès devient plus maîtrisée ;
+- la documentation peut mentionner les comptes sans exposer les secrets en clair.
+
+> **Point important :** les mots de passe eux-mêmes ne doivent jamais être reproduits en clair dans la documentation.
+
+## Limites et remarques
+
+Pour renforcer encore cette partie, il serait utile d’ajouter plus tard :
+
+- le mode exact de déploiement de Vaultwarden ;
+- la politique de sauvegarde du coffre ;
+- le mode de partage entre utilisateurs si celui-ci a été mis en place ;
+- les règles de rotation ou de révocation des accès.
+
+## Conclusion de section
+
+Dans YTech Solutions, Vaultwarden ne sert pas uniquement à stocker des mots de passe. Il participe à une démarche plus large de **centralisation, de gouvernance et de réduction des mauvaises pratiques**.

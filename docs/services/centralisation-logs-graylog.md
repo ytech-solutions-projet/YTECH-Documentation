@@ -6,67 +6,102 @@ title: Centralisation des logs avec Graylog
 
 Les **logs** sont les journaux d’événements générés par les systèmes et les applications. Lorsqu’ils restent dispersés sur différentes machines, il devient plus difficile de comprendre ce qui se passe dans l’environnement. C’est pourquoi **Graylog** a été utilisé pour centraliser ces informations.
 
-## Inputs configurés
+## Rôle de Graylog dans le projet
 
-_Capture fournie : page `System / Inputs` de Graylog._
+Graylog permet de :
 
-La capture montre que deux inputs ont été configurés et démarrés dans Graylog :
+- regrouper les journaux en un point unique ;
+- faciliter le diagnostic en cas de problème ;
+- améliorer la traçabilité des événements ;
+- visualiser rapidement l’activité observée sur les machines ;
+- disposer d’une source complémentaire aux outils de supervision.
+
+## Mise en place des inputs
+
+![Inputs Graylog actifs](/img/graylog/graylog-inputs.jpg)
+
+Cette capture montre les deux inputs actifs configurés dans Graylog : **GELF UDP** et **Syslog UDP**.
+
+La configuration observée dans le projet montre l’utilisation de deux entrées principales :
 
 - un input **GELF UDP** ;
 - un input **Syslog UDP**.
 
-On voit aussi plusieurs paramètres techniques utiles, comme l’écoute sur `0.0.0.0`, l’encodage `UTF-8`, le nombre de threads de traitement, les tailles de buffer, les ports associés et les métriques de débit réseau.
+Cette double configuration est intéressante, car elle permet de recevoir des journaux issus de sources et de formats différents. On constate également que les paramètres techniques de traitement sont visibles dans l’interface : écoute réseau, encodage, nombre de threads, ports utilisés et métriques de débit.
 
-Cette étape est importante, car sans input actif, Graylog ne peut rien centraliser. La présence simultanée de GELF et de Syslog montre que la plateforme a été pensée pour recevoir des journaux issus de plusieurs formats et de plusieurs sources.
+## Principe de fonctionnement
 
-## Message reçu via GELF
+Le fonctionnement de Graylog peut être résumé de la manière suivante :
 
-_Capture fournie : message de test GELF dans Graylog._
+1. une machine ou une application émet des journaux ;
+2. les messages sont envoyés vers un input Graylog ;
+3. Graylog reçoit, indexe et classe les événements ;
+4. les messages deviennent consultables dans l’interface de recherche ;
+5. ils peuvent ensuite être analysés dans une logique d’exploitation ou de sécurité.
 
-La première vue de recherche montre un événement de test reçu via l’input **GELF UDP**. On y voit notamment :
+```text
+Source de logs -> Input Graylog -> Indexation -> Recherche / analyse
+```
 
-- un message `test` ;
-- un champ `event_type` également positionné à `test` ;
-- une source `192.168.10.40` ;
-- un stockage dans l’index `graylog_0` ;
-- un routage dans le `Default Stream`.
+## Exemple de message reçu via GELF
 
-Cette capture confirme que Graylog reçoit bien les messages au bon format, les indexe et les rend consultables immédiatement dans l’interface.
+![Message de test reçu via GELF dans Graylog](/img/graylog/graylog-gelf-test-message.jpg)
 
-## Message reçu via Syslog
+On y voit un message `test` reçu via l’input **GELF UDP**, avec sa source, son index de stockage et son routage dans le flux par défaut.
 
-_Capture fournie : message de test Syslog dans Graylog._
+Une des vues disponibles dans le projet montre un message de test reçu via l’input **GELF UDP**. Les informations visibles permettent d’établir que :
 
-Une autre capture montre la réception d’un message `Test Graylog depuis Ubuntu` via l’input **Syslog UDP**. Plusieurs métadonnées sont visibles :
+- un message de test a bien été reçu ;
+- une source IP est associée au journal ;
+- l’événement est stocké dans un index Graylog ;
+- le message a été routé dans un flux par défaut.
 
-- la source `yyechadmin` ;
-- le nom d’application `ytech` ;
-- le niveau `user-level` ;
-- les champs de facility et de synchronisation.
+Cette preuve est importante, car elle montre que la chaîne de journalisation fonctionne réellement.
 
-Cette vue est utile, car elle prouve que la chaîne de journalisation fonctionne aussi pour les journaux système classiques envoyés depuis une machine Linux.
+## Exemple de message reçu via Syslog
 
-## Journaux centralisés
+La réception de messages système via **Syslog UDP** depuis une machine Ubuntu est illustrée dans la vue centralisée présentée ci-dessous.
 
-_Capture fournie : vue de plusieurs événements centralisés dans Graylog._
+Une autre vue montre la réception d’un message de test via **Syslog UDP** depuis une machine Linux. Cela prouve que Graylog peut centraliser à la fois :
 
-La dernière vue montre une série de logs réellement agrégés dans Graylog, avec un histogramme de messages et une liste d’événements provenant de l’hôte `yyechadmin`. On y retrouve des traces variées :
+- des messages système classiques ;
+- des journaux applicatifs ou structurés ;
+- des événements provenant de plusieurs origines.
 
-- des événements `cron` ;
-- des ouvertures et fermetures de session `pam_unix` ;
-- des messages `systemd` ;
-- des tâches planifiées liées à l’environnement serveur.
+## Journaux centralisés et exploitation
 
-Cette centralisation apporte une vraie valeur opérationnelle, car elle permet de consulter l’activité d’une machine sans se connecter en permanence au serveur source.
+![Journaux centralisés dans Graylog](/img/graylog/graylog-journaux-centralises.jpg)
 
-## Intérêt
+Cette vue montre des événements système déjà centralisés dans Graylog, notamment `cron`, `pam_unix` et `systemd`, en provenance de la machine `yyechadmin`.
 
-Graylog permet :
+La vue de recherche centralisée permet de consulter des événements variés provenant d’une même machine ou de plusieurs hôtes :
 
-- de regrouper les journaux en un seul point ;
-- de faciliter le diagnostic en cas de problème ;
-- d’améliorer la traçabilité ;
-- de valider qu’un message a bien été reçu, indexé et routé ;
-- de disposer d’une meilleure vision globale du système.
+- tâches planifiées `cron` ;
+- ouvertures et fermetures de session `pam_unix` ;
+- événements `systemd` ;
+- traces applicatives ou messages de test.
 
-Cette brique est importante, car elle transforme une infrastructure simplement fonctionnelle en infrastructure mieux observée et mieux comprise.
+Cette centralisation apporte une vraie valeur opérationnelle, car elle évite de devoir se connecter en permanence sur chaque machine pour consulter localement les journaux.
+
+## Synthèse opérationnelle
+
+| Source | Type de logs | Intérêt opérationnel | Bénéfice sécurité |
+| --- | --- | --- | --- |
+| GELF | Messages structurés ou applicatifs | Validation rapide d’un envoi de logs | Meilleure traçabilité |
+| Syslog | Journaux système Linux | Suivi de l’activité de la machine | Détection plus facile d’événements inhabituels |
+| Journaux centralisés | Vue agrégée | Diagnostic plus rapide | Corrélation plus simple des événements |
+
+## Limites et remarques
+
+Pour une documentation encore plus complète, il serait utile d’ajouter :
+
+- les ports exacts utilisés par chaque input ;
+- un exemple réel d’extracteur ou de pipeline si cette fonction a été exploitée ;
+- la politique de rétention ou de rotation des index ;
+- le détail des sources configurées de façon définitive.
+
+> **À compléter avec la valeur réelle observée dans l’environnement.**
+
+## Conclusion de section
+
+Graylog transforme les journaux techniques en information exploitable. Dans le projet YTech Solutions, il apporte une dimension de **visibilité et de traçabilité** indispensable pour comprendre le comportement de l’infrastructure.

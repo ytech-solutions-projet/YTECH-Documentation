@@ -4,14 +4,28 @@ title: Pare-feu OPNsense
 
 # Pare-feu OPNsense
 
-Dans l’architecture finale de YTech Solutions, **OPNsense** joue le rôle de pare-feu principal. Il permet de contrôler les flux entre les postes d’administration, les services internes et les applications web exposées. Cette brique est importante, car elle matérialise la séparation entre ce qui doit circuler librement dans le réseau et ce qui doit être autorisé de manière explicite.
+Dans l’architecture finale de YTech Solutions, **OPNsense** joue le rôle de pare-feu principal. Il permet de contrôler les flux entre les postes d’administration, les services internes et les applications web exposées. Cette brique est essentielle, car elle matérialise la séparation entre ce qui doit circuler librement dans le réseau et ce qui doit être autorisé de manière explicite.
+
+## Rôle d’OPNsense dans l’architecture
 
 L’intérêt d’OPNsense dans le projet ne se limite pas au blocage du trafic. Il sert aussi à :
 
 - visualiser l’état global du pare-feu et des passerelles ;
 - organiser les règles par interface ;
 - créer des alias réutilisables pour simplifier la configuration ;
-- appliquer une logique de moindre privilège sur les accès réseau.
+- appliquer une logique de **moindre privilège** sur les accès réseau ;
+- soutenir la segmentation entre administration, services internes et exposition web.
+
+## Principe de filtrage retenu
+
+La logique de filtrage mise en avant dans le projet repose sur une idée simple :
+
+- un flux n’est pas autorisé parce qu’il existe ;
+- il est autorisé parce qu’il répond à un besoin identifié.
+
+Cette approche s’oppose à une configuration trop permissive où les communications seraient largement ouvertes par défaut.
+
+> **Point important :** plus une règle est ciblée, plus elle est facile à justifier, à maintenir et à auditer.
 
 ## Tableau de bord OPNsense
 
@@ -19,56 +33,76 @@ L’intérêt d’OPNsense dans le projet ne se limite pas au blocage du trafic.
 
 Cette première capture montre l’écran d’accueil d’OPNsense. On y voit plusieurs informations utiles pour l’exploitation quotidienne :
 
-- le nom de l’équipement `Y-TECH.internal`, qui identifie clairement le pare-feu dans l’infrastructure ;
-- les versions d’OPNsense, de FreeBSD et d’OpenSSL, utiles pour vérifier la base logicielle utilisée ;
-- l’état des passerelles `WAN_DHCP` et `WAN_DHCP6`, qui confirme la connectivité IPv4 et IPv6 ;
-- le temps de fonctionnement et la charge système, qui donnent une indication rapide de la stabilité de la machine ;
-- les widgets de services et les graphes de trafic, qui permettent de vérifier en un coup d’œil que le système tourne correctement.
+- le nom de l’équipement ;
+- les versions logicielles principales ;
+- l’état des passerelles ;
+- la charge système et le temps de fonctionnement ;
+- les widgets de services et les graphes de trafic.
 
-Ce tableau de bord a un intérêt opérationnel fort : il centralise l’état du pare-feu, du réseau et des services système dans une seule interface. Pour un administrateur, cela facilite la détection rapide d’un problème de connectivité, d’une passerelle inactive ou d’une surcharge.
+Ce tableau de bord permet de vérifier rapidement si le pare-feu fonctionne correctement avant même d’analyser les règles en détail.
 
-## Création de l’alias `WEB_PORTS`
+## Intérêt des alias
 
 ![Alias WEB_PORTS dans OPNsense](/img/opnsense/opnsense-web-ports.png)
 
-Cette capture montre la création de l’alias **`WEB_PORTS`** dans le menu *Firewall > Aliases*. L’alias est configuré avec :
+La capture montre la création de l’alias **`WEB_PORTS`** dans le menu *Firewall > Aliases*. Cet alias regroupe les ports web standards `80` et `443`.
 
-- le type `Port(s)` ;
-- les valeurs `80` et `443` ;
-- un état activé, ce qui le rend immédiatement disponible dans les règles du pare-feu.
+L’usage d’un alias apporte plusieurs bénéfices :
 
-Le choix de cet alias apporte plusieurs avantages :
+- il évite de répéter des valeurs identiques dans plusieurs règles ;
+- il rend les règles plus lisibles ;
+- il simplifie la maintenance ;
+- il réduit le risque d’erreur lors des modifications futures.
 
-- il regroupe les ports standards du trafic web, c’est-à-dire **HTTP** (`80`) et **HTTPS** (`443`) ;
-- il évite de répéter les mêmes ports dans plusieurs règles ;
-- il rend la lecture des règles plus claire, car `WEB_PORTS` est plus parlant qu’une suite de numéros ;
-- il simplifie la maintenance : si un port doit être ajouté ou modifié plus tard, il suffit de changer l’alias au lieu de corriger chaque règle une par une.
-
-Dans le contexte du projet, cet alias sert à encadrer l’accès aux services web hébergés derrière le reverse proxy. C’est une bonne pratique de configuration, car elle améliore à la fois la lisibilité et la fiabilité de l’ensemble des règles.
+Dans une documentation soutenable, cet élément est important car il prouve que la configuration n’a pas été réalisée de manière improvisée.
 
 ## Règles LAN et logique de filtrage
 
 ![Règles LAN OPNsense](/img/opnsense/opnsense-lan-rules.png)
 
-Cette capture présente les règles appliquées sur l’interface **LAN**. On y distingue plusieurs autorisations ciblées ainsi que des restrictions plus précises. Même si toutes les règles n’ont pas le même niveau de granularité, l’ensemble montre une logique claire : ne laisser passer que les flux utiles à l’administration et à l’accès aux services autorisés.
+Cette capture présente les règles appliquées sur l’interface **LAN**. On y distingue plusieurs autorisations ciblées ainsi que des restrictions explicites.
 
-Parmi les éléments visibles sur cette capture, on peut relever :
+Les éléments visibles montrent une volonté de :
 
-- une présence des règles par protocole (`IPv4`, `IPv6`, `TCP`, `ICMP`) selon le besoin réseau ;
-- l’utilisation d’objets nommés comme `LAN_NET`, `TAILSCALE_NET`, `ADMIN_PC` et `Tailscale_Serveur`, ce qui améliore fortement la lisibilité ;
-- une règle dédiée à l’accès de `ADMIN_PC` vers `Tailscale_Serveur` sur l’alias `WEB_PORTS`, ce qui signifie que le poste d’administration est autorisé à atteindre le serveur uniquement sur les ports web nécessaires ;
-- une règle `ICMP`, utile pour les tests de connectivité et le diagnostic réseau ;
-- une règle de blocage sur `SSH (22)`, qui illustre une volonté de limiter les accès d’administration non souhaités.
+- distinguer les objets réseau par nom ;
+- cibler les flux par protocole et destination ;
+- autoriser les accès utiles à l’administration et aux services web ;
+- bloquer ou limiter certains accès plus sensibles comme SSH.
 
-Cette organisation est intéressante pour plusieurs raisons :
+## Lecture des règles visibles
 
-- elle traduit une **segmentation logique** entre les machines, les réseaux et les usages ;
-- elle réduit la surface d’exposition en évitant les ouvertures trop larges ;
-- elle facilite les audits, car chaque règle est plus simple à comprendre ;
-- elle s’inscrit dans une démarche de **moindre privilège**, où un flux n’est autorisé que s’il répond à un besoin identifié.
+Le tableau suivant synthétise la logique observable dans la capture.
 
-## Apport d’OPNsense dans le projet
+| Élément visible | Interprétation | Intérêt |
+| --- | --- | --- |
+| `WEB_PORTS` | Regroupement des ports web `80` et `443` | Lisibilité et maintenance |
+| `ADMIN_PC -> Tailscale_Serveur -> WEB_PORTS` | Autorisation ciblée d’un poste d’administration vers les ports web | Contrôle des accès |
+| Règle `ICMP` | Autorisation de tests réseau ciblés | Diagnostic et supervision |
+| Blocage `SSH (22)` | Limitation d’un accès administratif sensible | Réduction de l’exposition |
+| Objets nommés `LAN_NET`, `TAILSCALE_NET`, `ADMIN_PC` | Structuration de la configuration | Compréhension plus rapide |
 
-L’intégration d’OPNsense renforce concrètement l’architecture finale. Elle montre que la sécurité du projet n’est pas seulement applicative, mais aussi réseau. Grâce à ce pare-feu, les accès peuvent être structurés, justifiés et contrôlés.
+## Apports concrets dans le projet
 
-Cette partie complète donc naturellement le reverse proxy, le durcissement Linux, le VPN et les autres outils de supervision. Ensemble, ces éléments construisent une infrastructure plus cohérente, plus lisible et plus défendable.
+L’intégration d’OPNsense renforce concrètement l’architecture finale :
+
+- la segmentation réseau devient visible et justifiable ;
+- les flux ne sont plus laissés implicites ;
+- les services exposés peuvent être encadrés plus proprement ;
+- la sécurité ne repose plus uniquement sur la configuration applicative.
+
+Cette partie complète naturellement le reverse proxy, le hardening Linux, l’accès distant contrôlé et les outils d’observation.
+
+## Limites ou points à compléter
+
+Pour une version encore plus démonstrative, il serait utile d’ajouter :
+
+- le détail complet des interfaces et sous-réseaux ;
+- un extrait des règles WAN si elles ont été utilisées ;
+- la politique par défaut réellement appliquée ;
+- le nom exact des objets réseau utilisés dans la configuration finale.
+
+> **À compléter avec la valeur réelle observée dans l’environnement.**
+
+## Conclusion de section
+
+OPNsense apporte au projet une couche de contrôle réseau essentielle. Son intérêt ne réside pas uniquement dans le filtrage, mais dans la capacité à **formaliser une politique d’accès lisible, ciblée et défendable**.

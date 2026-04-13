@@ -6,59 +6,75 @@ title: Supervision avec Zabbix
 
 La supervision est importante, car un service peut être correctement déployé tout en devenant indisponible plus tard. Dans le projet YTech Solutions, **Zabbix** a été utilisé pour vérifier la disponibilité du site, suivre l’état des hôtes et observer plusieurs indicateurs de fonctionnement.
 
-## Vue globale du tableau de bord
+## Rôle de Zabbix dans le projet
 
-_Capture fournie : tableau de bord global Zabbix._
+Zabbix sert à :
 
-La vue globale montre que la supervision ne se limite pas à un simple contrôle binaire. On y retrouve plusieurs éléments utiles :
+- surveiller l’état général des services ;
+- suivre la disponibilité des hôtes ;
+- mesurer certains indicateurs de performance ;
+- détecter des anomalies ou des alertes ;
+- fournir une visibilité exploitable pour l’administration.
 
-- l’activité générale du serveur Zabbix avec un débit d’environ `2.41` valeurs par seconde ;
-- les informations système de la plateforme de supervision ;
-- l’état de disponibilité des hôtes ;
-- une synthèse des problèmes par niveau de gravité ;
-- une liste des incidents courants, ici une alerte de mémoire élevée sur le serveur Zabbix.
+## Supervision globale
 
-Cette vue est importante, car elle donne immédiatement une lecture opérationnelle de l’environnement. En quelques secondes, l’administrateur peut voir si la plateforme fonctionne correctement, si des hôtes répondent encore et si une anomalie mérite une investigation plus poussée.
+![Vue globale Zabbix](/img/zabbix/zabbix-global-view.jpg)
 
-## Hôtes supervisés
+Cette vue d’ensemble met en évidence la disponibilité des hôtes, la sévérité des problèmes et les principales informations système remontées par la plateforme.
 
-_Capture fournie : page des hôtes dans Zabbix._
+Le tableau de bord global montre que la supervision ne se limite pas à un simple contrôle binaire. Il permet généralement d’observer :
 
-La page des hôtes montre les équipements et services déjà intégrés dans la supervision. Dans la capture, on distingue notamment :
+- l’activité du serveur Zabbix ;
+- l’état des hôtes supervisés ;
+- les problèmes par gravité ;
+- des indicateurs synthétiques utiles à l’exploitation ;
+- les incidents actuellement visibles sur la plateforme.
 
-- `App RH CRUD` ;
-- `OpenSense` ;
-- `Site Commercial Ytech` ;
-- `Zabbix server`.
+Cette vue est précieuse, car elle fournit en quelques secondes une lecture opérationnelle de l’environnement.
 
-Cette liste montre que la supervision porte à la fois sur l’application métier, l’infrastructure réseau et le serveur de supervision lui-même. Les colonnes visibles permettent aussi de consulter rapidement :
+## Hôtes surveillés
 
-- l’interface utilisée pour le suivi ;
-- la disponibilité de l’agent ou du service ;
+![Hôtes supervisés dans Zabbix](/img/zabbix/zabbix-hosts.jpg)
+
+On y distingue plusieurs hôtes supervisés, dont `App RH CRUD`, `OpenSense`, `Site Commercial Ytech` et `Zabbix server`, tous visibles depuis l’interface d’administration.
+
+La page des hôtes montre les équipements et services déjà intégrés dans la supervision. Elle permet notamment de consulter :
+
+- le nom de l’hôte ;
+- l’interface associée ;
+- la disponibilité ;
 - le statut d’activation ;
 - l’accès aux dernières données ;
-- les problèmes, graphiques, tableaux de bord et contrôles web associés.
+- les problèmes ou graphiques associés.
 
-Autrement dit, Zabbix sert ici de point central pour organiser le suivi de plusieurs briques techniques au même endroit.
+Cette vue montre que la supervision porte à la fois sur les services applicatifs et sur des briques d’infrastructure.
 
 ## Scénario web configuré
 
 ![Scénario web Zabbix](/img/zabbix/zabbix-web-scenario.png)
 
-Cette première capture montre le scénario web configuré dans Zabbix pour contrôler l’accessibilité du service. On y voit le scénario `Disponibilité site Ytech`, associé au `Web Server Ytech`, avec un intervalle d’exécution régulier et un état `Enabled`.
+Cette capture montre le scénario web configuré dans Zabbix pour contrôler l’accessibilité du service. On y voit le scénario `Disponibilité site Ytech`, associé au `Web Server Ytech`, avec un état `Enabled`.
 
-Ce type de scénario est utile, car il permet de vérifier automatiquement plusieurs éléments :
+Ce type de scénario est utile, car il permet de vérifier automatiquement :
 
 - si l’URL répond ;
 - si le code HTTP attendu est bien retourné ;
 - si le délai de réponse reste acceptable ;
 - si une étape du parcours web échoue.
 
+## Disponibilité et temps de réponse
+
+Le scénario web permet de transformer l’accessibilité du site en données observables. Cela apporte une valeur concrète :
+
+- détection plus rapide d’une indisponibilité ;
+- suivi de la réponse du service dans le temps ;
+- meilleure compréhension de l’état réel du parcours web.
+
 ## Résultats du contrôle
 
 ![Résultats du scénario web Zabbix](/img/zabbix/zabbix-web-results.png)
 
-Cette seconde capture montre les éléments remontés par Zabbix après l’exécution du scénario : code de réponse, temps de réponse, erreur éventuelle et état des étapes. On voit ici que l’outil conserve une trace exploitable pour comprendre rapidement si le service est disponible ou si un incident doit être investigué.
+Cette capture montre les éléments remontés par Zabbix après l’exécution du scénario : code de réponse, temps de réponse, erreur éventuelle et état des étapes.
 
 Dans une logique d’exploitation, cette vue apporte une vraie valeur :
 
@@ -66,14 +82,36 @@ Dans une logique d’exploitation, cette vue apporte une vraie valeur :
 - elle facilite le diagnostic en cas d’indisponibilité ;
 - elle donne des données concrètes sur le comportement du service dans le temps.
 
-## Intérêt
+## Alertes observées
 
-Zabbix permet :
+Selon les vues disponibles dans le projet, Zabbix peut également faire remonter :
 
-- de vérifier si le service répond ;
-- de surveiller la disponibilité ;
-- de détecter plus rapidement un dysfonctionnement ;
-- d’améliorer la visibilité opérationnelle sur l’infrastructure ;
-- d’avoir une vue centralisée sur plusieurs hôtes et plusieurs types d’alertes.
+- des alertes de disponibilité ;
+- des anomalies liées aux performances ;
+- des problèmes système sur les hôtes supervisés.
 
-Pour un lecteur non technique, on peut dire que Zabbix sert à "surveiller si le site et les serveurs répondent toujours correctement".
+Même lorsqu’une alerte n’est pas critique, sa présence est utile, car elle montre que la plateforme détecte effectivement des événements exploitables.
+
+## Tableau de synthèse
+
+| Élément supervisé | Type de contrôle | Ce que cela permet de savoir |
+| --- | --- | --- |
+| Hôte | Disponibilité / statut | Si la machine ou le service répond encore |
+| Scénario web | Parcours HTTP | Si l’application reste accessible |
+| Dernières données | Valeurs collectées | Si les métriques remontent correctement |
+| Problèmes | Alertes et anomalies | Si une action d’administration est nécessaire |
+
+## Limites et remarques
+
+Pour renforcer encore cette page, il serait utile d’ajouter :
+
+- les noms exacts de tous les hôtes suivis ;
+- les déclencheurs les plus importants ;
+- les seuils d’alerte retenus ;
+- les graphiques ou indicateurs les plus significatifs.
+
+> **À compléter avec la valeur réelle observée dans l’environnement.**
+
+## Conclusion de section
+
+Zabbix apporte au projet une dimension de **visibilité opérationnelle** indispensable. Il permet de passer d’un environnement simplement fonctionnel à un environnement réellement surveillé.

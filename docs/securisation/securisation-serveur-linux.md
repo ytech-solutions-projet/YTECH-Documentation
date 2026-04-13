@@ -1,10 +1,20 @@
-﻿---
+---
 title: Sécurisation du serveur Linux
 ---
 
 # Sécurisation du serveur Linux
 
-Le serveur Linux constitue le socle de l’infrastructure. Sa sécurisation est donc essentielle. Dans le cadre du projet, plusieurs mécanismes ont été étudiés ou mis en place pour renforcer la protection du système.
+Le serveur Linux constitue le socle d’hébergement du projet. Sa sécurisation est donc essentielle. Dans YTech Solutions, plusieurs mécanismes ont été étudiés ou mis en place pour renforcer la protection du système, limiter les accès non souhaités et mieux observer l’activité du serveur.
+
+## Rôle de la sécurisation système dans le projet
+
+La sécurité du serveur ne peut pas être réduite à un seul outil. Elle repose sur plusieurs mesures complémentaires :
+
+- contrôle des accès d’administration ;
+- protection contre certains comportements abusifs ;
+- durcissement de la configuration système ;
+- audit du niveau de sécurité ;
+- visibilité sur les événements réseau et système.
 
 ## Fail2Ban
 
@@ -14,6 +24,10 @@ Le serveur Linux constitue le socle de l’infrastructure. Sa sécurisation est 
 
 Cette capture montre l’état de Fail2Ban et les protections actives sur le service SSH.
 
+### Ce que cela prouve
+
+Cette preuve montre que la protection ne repose pas uniquement sur la robustesse des mots de passe ou des comptes. Une couche de défense automatique a également été prévue pour ralentir certains abus répétitifs.
+
 ## Configuration SSH
 
 L’accès SSH est un point critique dans l’administration d’un serveur. Il doit donc être protégé avec soin.
@@ -21,6 +35,18 @@ L’accès SSH est un point critique dans l’administration d’un serveur. Il 
 ![Configuration SSH sécurisée](/img/securisation-linux/ssh-config.png)
 
 Cette capture présente une partie de la configuration SSH, notamment les paramètres de sécurité liés à l’authentification et à l’accès administrateur.
+
+### Exemple de paramètres à documenter
+
+```conf
+# Exemple de configuration à adapter avec la valeur réelle observée
+PermitRootLogin no
+PasswordAuthentication <yes|no>
+PubkeyAuthentication yes
+AllowUsers <utilisateurs_autorises>
+```
+
+> **À compléter avec la configuration réelle du fichier `sshd_config`.**
 
 ## Audit Lynis
 
@@ -40,47 +66,62 @@ Dans le cadre du projet, l’audit a permis de comparer l’état du serveur hé
 | Firewall | Activé | Activé |
 | Malware scanner | Désactivé | Activé |
 
-Ces résultats montrent que le niveau de protection du serveur s’est amélioré de manière visible.
+### Analyse de l’avant / après
+
+Ces résultats montrent que le niveau de protection du serveur s’est amélioré de manière visible :
 
 - le score de hardening passe de **67** à **85**, soit un gain de **18 points** ;
-- le nombre de tests réalisés augmente de **278** à **289**, ce qui reflète une couverture d’audit plus large ;
-- le pare-feu reste actif dans les deux analyses, ce qui confirme la présence d’un filtrage réseau stable ;
-- le malware scanner apparaît ensuite comme activé, ce qui constitue un renforcement supplémentaire de la défense du système.
+- le nombre de tests réalisés augmente, ce qui reflète une couverture d’audit plus large ;
+- le pare-feu reste actif dans les deux analyses ;
+- le malware scanner apparaît ensuite comme activé.
 
-Cette évolution montre que le travail de hardening n’est pas seulement théorique. Il a produit un résultat mesurable sur le serveur Linux qui héberge l’application, avec une meilleure posture globale et davantage de mécanismes de protection visibles dans l’audit.
+Cette évolution est importante, car elle apporte une **preuve mesurable** du renforcement du socle système.
 
 ## Détection réseau avec Suricata
 
-_Captures fournies : état du service Suricata et consultation du fichier `eve.json`._
+![Statut du service Suricata](/img/securisation-linux/suricata-status.jpg)
 
-En complément du durcissement du serveur, **Suricata** a été utilisé comme moteur de détection réseau. Les captures montrent deux éléments particulièrement utiles.
+Cette sortie confirme que `suricata.service` est bien chargé, activé et actuellement en cours d’exécution sur le serveur.
 
-La première affiche l’état du service avec la commande `systemctl status suricata`. On y voit que :
+![Extrait du fichier eve.json de Suricata](/img/securisation-linux/suricata-eve-json.jpg)
 
-- le service `suricata.service` est bien **loaded** et **enabled** ;
-- son état est **active (running)** ;
-- la version exécutée est `7.0.3` ;
-- le démon fonctionne avec la configuration `/etc/suricata/suricata.yaml`.
+L’extrait du fichier `eve.json` montre différents événements `flow` et `fileinfo`, ce qui confirme que Suricata produit bien des traces exploitables sur le trafic observé.
 
-Cette vérification est importante, car elle confirme que le moteur IDS/IDP n’est pas seulement installé, mais réellement démarré et opérationnel sur la machine.
+En complément du durcissement du serveur, **Suricata** a été utilisé comme moteur de détection réseau. Les éléments attendus dans cette partie de la documentation doivent permettre de montrer :
 
-La seconde capture montre l’analyse du fichier `eve.json`, qui contient les événements produits par Suricata. On y distingue différents types de traces :
+- que le service est bien installé et démarré ;
+- qu’il produit des événements exploitables ;
+- qu’il apporte une visibilité supplémentaire sur le trafic observé.
 
-- des événements de flux réseau (`flow`) ;
-- des métadonnées réseau sur les communications observées ;
-- des événements HTTP et `fileinfo` ;
-- des échanges liés à des accès web et à des communications internes.
+À partir des éléments déjà identifiés, la lecture attendue est la suivante :
 
-Cette production d’événements montre que Suricata apporte une visibilité supplémentaire sur le trafic, au-delà des journaux système classiques. Dans une logique de sécurité, cela permet de mieux repérer les comportements réseau, de conserver des traces exploitables et d’alimenter une analyse plus fine en cas d’incident.
+- le service `suricata.service` est actif ;
+- la configuration est chargée depuis un fichier dédié ;
+- les événements du fichier `eve.json` contiennent des traces de flux réseau, d’accès HTTP et d’informations de type `fileinfo`.
 
-## Intérêt du hardening
+> **À compléter avec les commandes et les extraits réels observés dans l’environnement.**
 
-L’objectif de ces mesures est de :
+## Apports concrets dans le projet
 
-- réduire les risques d’accès non autorisés ;
-- mieux contrôler l’administration distante ;
-- améliorer la cohérence globale du système ;
-- renforcer la posture de sécurité du serveur ;
-- ajouter une capacité de détection sur l’activité réseau observée.
+La sécurisation du serveur Linux apporte plusieurs bénéfices directs :
 
-Même pour un lecteur non spécialiste, il faut retenir l’idée suivante : un serveur Linux correctement configuré ne se contente pas de fonctionner, il doit également limiter autant que possible les risques inutiles.
+- réduction du risque d’accès non autorisés ;
+- meilleure maîtrise de l’administration distante ;
+- amélioration mesurable de la posture de sécurité ;
+- visibilité plus fine sur les événements système et réseau ;
+- base plus solide pour l’hébergement de l’application.
+
+## Mesures complémentaires possibles
+
+Pour aller plus loin, plusieurs actions pourraient être ajoutées ou détaillées :
+
+- journalisation renforcée des accès administratifs ;
+- politique de mises à jour et de correctifs plus explicitement documentée ;
+- désactivation des services non nécessaires ;
+- règles `sudo` plus restrictives ;
+- vérification régulière de l’exposition réseau ;
+- export ou centralisation plus systématique des événements de sécurité.
+
+## Conclusion de section
+
+Le travail de hardening réalisé dans YTech Solutions montre qu’un serveur Linux ne doit pas seulement être fonctionnel. Il doit être **administrable, observable et défendable**, avec des preuves concrètes de renforcement.

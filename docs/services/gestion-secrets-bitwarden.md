@@ -1,10 +1,30 @@
-﻿---
+---
 title: Gestion des secrets avec Bitwarden
 ---
 
 # Gestion des secrets avec Bitwarden / Vaultwarden
 
 La gestion des mots de passe, identifiants et informations sensibles est un sujet important dans tout projet technique. Dans YTech Solutions, une solution de type **Bitwarden / Vaultwarden** a été déployée afin de centraliser ces informations et d’éviter leur dispersion.
+
+## Vue globale des coffres Vaultwarden
+
+_Capture fournie : liste des coffres dans Vaultwarden._
+
+La capture de Vaultwarden montre une vue plus large de l’organisation des accès dans le coffre. On y voit plusieurs éléments importants :
+
+- le filtrage par coffre, type d’élément et dossier ;
+- les catégories comme `Identifiant`, `Carte de paiement`, `Identité`, `Note` et `Clé SSH` ;
+- une liste d’entrées déjà créées pour différents utilisateurs et services ;
+- l’indication du propriétaire sur chaque élément.
+
+La liste visible met en évidence plusieurs comptes enregistrés dans l’environnement YTech, par exemple :
+
+- `BENAMAR Othmane` ;
+- `HR 1` ;
+- `IT` ;
+- plusieurs entrées liées à `192.168.9.193` avec des adresses `@ytech.local`.
+
+Cette vue est intéressante, car elle montre que Vaultwarden n’est pas utilisé comme un coffre vide ou théorique. Il sert réellement à structurer les accès de plusieurs utilisateurs dans un espace unique, organisé et consultable.
 
 ## Remplissage automatique sur l’application RH
 
@@ -45,6 +65,7 @@ Cette solution permet :
 
 - de centraliser les secrets ;
 - de structurer les accès ;
+- d’organiser les comptes utilisateurs dans un coffre unique ;
 - d’éviter les pratiques risquées comme les mots de passe dispersés ;
 - d’améliorer la rigueur administrative du projet.
 

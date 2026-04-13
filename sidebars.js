@@ -18,6 +18,7 @@
       label: 'Déploiement et sécurisation',
       items: [
         'securisation/deploiement-application',
+        'securisation/pare-feu-opnsense',
         'securisation/reverse-proxy-nginx',
         'securisation/securisation-serveur-linux',
         'securisation/waf',

@@ -17,6 +17,7 @@ Le projet YTech Solutions a permis d’obtenir plusieurs résultats concrets sur
 ## Résultats en matière de sécurité
 
 - amélioration de l’organisation globale de l’architecture ;
+- mise en place d’un pare-feu OPNsense avec segmentation et règles de filtrage ;
 - meilleure maîtrise des accès ;
 - renforcement du serveur Linux ;
 - visibilité accrue grâce à Zabbix et Graylog ;

@@ -23,6 +23,7 @@ Le projet YTech Solutions repose sur plusieurs technologies et outils complémen
 
 ## Outils de sécurité et de supervision
 
+- **OPNsense** : pare-feu, routage et filtrage réseau ;
 - **Fail2Ban** ;
 - **Graylog** ;
 - **Zabbix** ;

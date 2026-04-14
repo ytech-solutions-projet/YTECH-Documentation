@@ -96,3 +96,111 @@ select {
   --ifm-footer-background-color: #090b0a;
   border-top: 1px solid rgba(246, 251, 248, 0.1);
 }
+
+.pentest-hero {
+  background:
+    linear-gradient(135deg, rgba(36, 209, 126, 0.12), rgba(32, 197, 214, 0.08)),
+    var(--ifm-background-surface-color, rgba(16, 20, 18, 0.02));
+  border: 1px solid rgba(36, 209, 126, 0.16);
+  border-radius: 8px;
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem;
+  padding: 1.75rem;
+}
+
+.pentest-kicker {
+  color: var(--ifm-color-primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.pentest-hero h2 {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-bottom: 0.9rem;
+}
+
+.pentest-lead {
+  line-height: 1.7;
+}
+
+.pentest-hero .pentest-lead:last-child {
+  margin-bottom: 0;
+}
+
+.pentest-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pentest-card {
+  background: rgba(16, 20, 18, 0.04);
+  border: 1px solid rgba(16, 20, 18, 0.1);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem;
+}
+
+[data-theme='dark'] .pentest-card {
+  background: rgba(246, 251, 248, 0.04);
+  border-color: rgba(246, 251, 248, 0.1);
+}
+
+.pentest-card strong {
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pentest-card span {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.pentest-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.pentest-download-note {
+  background: rgba(36, 209, 126, 0.08);
+  border: 1px solid rgba(36, 209, 126, 0.14);
+  border-radius: 8px;
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1.25rem;
+}
+
+.pentest-download-copy {
+  line-height: 1.7;
+}
+
+.pentest-download-note .pentest-download-copy {
+  margin: 0;
+}
+
+@media screen and (max-width: 760px) {
+  .pentest-hero {
+    padding: 1.25rem;
+  }
+
+  .pentest-hero h2 {
+    font-size: 1.7rem;
+  }
+
+  .pentest-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pentest-actions a,
+  .pentest-download-note a {
+    width: 100%;
+  }
+}

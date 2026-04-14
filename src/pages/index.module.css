@@ -71,14 +71,15 @@
 }
 
 .buttons {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
 
 .primaryButton,
-.secondaryButton {
+.secondaryButton,
+.downloadButton {
   border-radius: 8px;
   font-weight: 800;
   letter-spacing: 0;
@@ -106,6 +107,18 @@
   background: rgba(246, 251, 248, 0.2);
   border-color: #f6fbf8;
   color: #ffffff;
+}
+
+.downloadButton {
+  background: transparent;
+  border-color: rgba(36, 209, 126, 0.45);
+  color: #24d17e;
+}
+
+.downloadButton:hover {
+  background: #24d17e;
+  border-color: #24d17e;
+  color: #07110c;
 }
 
 .commandCenter {
@@ -166,6 +179,88 @@
   text-align: center;
 }
 
+.pentestSpotlight {
+  background: linear-gradient(180deg, #eaf6ef 0%, #f6fbf8 100%);
+  padding: 0 0 4.5rem;
+}
+
+.pentestGrid {
+  background:
+    linear-gradient(135deg, rgba(36, 209, 126, 0.14), rgba(32, 197, 214, 0.08)),
+    #101412;
+  border: 1px solid rgba(16, 20, 18, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(16, 20, 18, 0.18);
+  color: #f6fbf8;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  padding: 2.2rem;
+}
+
+.pentestCopy h2 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.pentestCopy p:last-of-type {
+  color: #d9e7e0;
+  font-size: 1.03rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.pentestPanel {
+  display: grid;
+  gap: 1rem;
+}
+
+.pentestBadgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.pentestBadge {
+  background: rgba(246, 251, 248, 0.08);
+  border: 1px solid rgba(246, 251, 248, 0.14);
+  border-radius: 999px;
+  color: #bff7d9;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.5rem 0.85rem;
+  text-transform: uppercase;
+}
+
+.pentestMetricGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pentestMetricCard {
+  background: rgba(15, 21, 18, 0.88);
+  border: 1px solid rgba(246, 251, 248, 0.08);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.65rem;
+  min-height: 100%;
+  padding: 1.1rem;
+}
+
+.pentestMetricCard strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.pentestMetricCard span {
+  color: #cfe0d7;
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
 @media screen and (max-width: 760px) {
   .buttons {
     align-items: stretch;
@@ -186,6 +281,23 @@
 
   .commandCopy h2 {
     font-size: 1.9rem;
+  }
+
+  .pentestSpotlight {
+    padding-bottom: 3rem;
+  }
+
+  .pentestGrid {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .pentestCopy h2 {
+    font-size: 1.85rem;
+  }
+
+  .pentestMetricGrid {
+    grid-template-columns: 1fr;
   }
 
   .signalStats {

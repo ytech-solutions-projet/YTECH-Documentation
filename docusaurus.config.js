@@ -67,6 +67,11 @@ const config = {
             position: 'left',
           },
           {
+            to: '/docs/services/pentest',
+            label: 'Pentest',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/ytech-solutions-projet/YTECH-Documentation',
             label: 'GitHub',
             position: 'right',
@@ -103,6 +108,10 @@ const config = {
               {
                 label: 'Scans Nessus',
                 to: '/docs/services/scans-vulnerabilites-nessus',
+              },
+              {
+                label: 'Rapport de pentest',
+                to: '/docs/services/pentest',
               },
             ],
           },

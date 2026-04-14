@@ -33,6 +33,7 @@
         'services/gestion-secrets-bitwarden',
         'services/assistant-ia-local',
         'services/scans-vulnerabilites-nessus',
+        'services/pentest',
         'services/supervision-zabbix',
       ],
     },

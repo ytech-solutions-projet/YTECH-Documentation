@@ -43,6 +43,7 @@
       items: [
         'analyse/problemes-rencontres',
         'analyse/resultats-obtenus',
+        'analyse/analyse-financiere',
         'analyse/conclusion',
       ],
     },
